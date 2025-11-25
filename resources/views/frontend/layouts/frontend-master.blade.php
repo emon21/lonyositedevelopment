@@ -252,7 +252,7 @@
           <div class="lonyo-header-info-wraper2">
             <div class="lonyo-header-info-content">
               <ul>
-                <li><a href="sign-in.html">Log in</a></li>
+                <li><a href="{{ route('login') }}">Log in</a></li>
               </ul>
             </div>
             <a class="lonyo-default-btn lonyo-header-btn" href="conact-us.html">Book a demo</a>

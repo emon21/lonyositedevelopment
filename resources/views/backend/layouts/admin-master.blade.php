@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>{{ $title ?? 'Dashboard | Tapeli - Responsive Admin Dashboard Template' }}</title>
+        <title>{{ $title ?? 'Dashboard | - Admin Dashboard' }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc."/>
         <meta name="author" content="Zoyothemes"/>
@@ -24,7 +24,6 @@
 
         <!-- Begin page -->
         <div id="app-layout">
-
 
             <!-- Topbar Start -->
             @include('backend/partials/topbar')
@@ -49,7 +48,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="text-center col fs-13 text-muted">
-                                &copy; <script>document.write(new Date().getFullYear())</script> - Made with <span class="mdi mdi-heart text-danger"></span> by <a href="#!" class="text-reset fw-semibold">Zoyothemes</a> 
+                                &copy; <script>document.write(new Date().getFullYear())</script> - Made with <span class="mdi mdi-heart text-danger"></span> by <a href="#!" class="text-reset fw-semibold">Dev Hasib</a> 
                             </div>
                         </div>
                     </div>
@@ -83,6 +82,22 @@
 
         <!-- App js-->
         <script src="{{ asset('backend') }}/assets/js/app.js"></script>
+
+        <!-- axios cdn -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
+            {{-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> --}}
+            <script>
+                axios.get('/user/12345')
+                        .then(function (response) {
+                            console.log(response.data);
+                            console.log(response.status);
+                            console.log(response.statusText);
+                            console.log(response.headers);
+                            console.log(response.config);
+                        });
+            </script>
+        
+
 
     </body>
 </html>

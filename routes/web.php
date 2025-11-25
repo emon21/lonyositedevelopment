@@ -7,15 +7,15 @@ use App\Http\Controllers\Admin\AdminController;
 Route::get('/', function () {
     
     return view('frontend/index');
-
+    
 });
 
-
+// Dashboard
 Route::get('/dashboard', function () {
     return view('backend/dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
+// Profile
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
 
 // Admin Logout
 Route::post('admin/logout',[AdminController::class,'AdminLogout'])->name('admin-logout');
