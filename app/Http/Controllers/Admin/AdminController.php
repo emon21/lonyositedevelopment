@@ -44,9 +44,10 @@ class AdminController extends Controller
             Auth::logout();
 
             return redirect()->route('custom.verification.user')->with('status','Verification Code sent to your mail');
+            
 
             return redirect()->back()->withErrors([
-                'email' => 'Invalid Credentials Provided'
+                'email' => 'Invalid Credentials P rovided'
             ]);
 
         }
@@ -106,5 +107,105 @@ class AdminController extends Controller
         //         'verification_code' => 'Invalid Verification Code'
         //     ]);
         // }
+    }
+
+
+    # Profile
+    public function Profile(){
+        // login yes/no
+    //    $userId = Auth::check();
+
+       $userId = Auth::user();
+       $profileData = User::find($userId->id);
+        return view('backend/profile/profile',['profile'=>$profileData]);
+    }
+
+    # ProfileUpdate
+    public function ProfileUpdate(Request $request){
+        $userId = Auth::user();
+        $profile = User::find($userId->id);
+
+        $profile->name = $request->name;
+        $profile->email = $request->email;
+        $profile->phone = $request->phone;
+
+
+
+        $oldPhotoPath = $profile->photo;
+        # Profile Picture upload
+        if($request->hasFile('photo')){
+
+            $file = $request->file('photo');
+
+            // delete old photo
+            // @unlink(public_path('uploads/admin/'. $profile->photo));
+
+            // delete old photo
+            // if($profile->photo){
+            //     $oldPhotoPath = public_path('uploads/admin/'.$profile->photo);
+            //     if(file_exists($oldPhotoPath)){
+            //         unlink($oldPhotoPath);
+            //     }
+            // }
+
+            // upload photo
+            $ImageUrl = date('YmdHi').'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('uploads/admin/'),$ImageUrl);
+            // $profileData['photo'] = $ImageUrl;
+
+            // database image full path store this code //DB -> photo 'ulods/admin/202407231234.jpg' field e full path save hobe
+        //    $path = 'uploads/admin/';
+        //    $profileData->photo = $path . $ImageUrl;
+
+           // database image name store this code //DB -> photo '202407231234.jpg' field e image name save hobe
+           $profile->photo = $ImageUrl;
+
+            // $profileData->save();
+
+            // working code...
+            // $file = $request->file('profilePicture');
+            // $extension = $file->getClientOriginalExtension();
+            // $filename = time() . '.' . $extension;
+            // $file->move('uploads/admin/', $filename);
+            // $profileData->photo = $filename;
+
+            # old image delete
+
+            // if($oldPhotoPath && file_exists(public_path('uploads/admin/' . $oldPhotoPath))){
+            //     unlink(public_path('uploads/admin/' . $oldPhotoPath));
+            // }
+
+            // if($oldPhotoPath && $oldPhotoPath !== $ImageUrl && file_exists(public_path('uploads/admin/' . $oldPhotoPath))){
+            //     unlink(public_path('uploads/admin/' . $oldPhotoPath));
+            // }
+            
+            if($oldPhotoPath && $oldPhotoPath !== $ImageUrl){
+                $this->deleteOldImage($oldPhotoPath);
+                
+                // unlink(public_path('uploads/admin/' . $oldPhotoPath));
+            }
+
+        }
+
+
+        // return $request->photo;
+
+        $profile->address = $request->address;
+        $profile->role = $request->role;
+        $profile->updated_at = now();
+        $profile->save();
+
+        return redirect()->back()->with('success','Profile Updated Successfully');
+    }
+
+
+
+    private function deleteOldImage(string $oldPhotoPath): void
+    {
+        $fullPath = public_path('uploads/admin/' . $oldPhotoPath);
+
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
     }
 }

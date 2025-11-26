@@ -118,7 +118,7 @@
                         </div>
 
                         <!-- item-->
-                        <a href="pages-profile.html" class="dropdown-item notify-item">
+                        <a href="{{ route('admin.profile')}}" class="dropdown-item notify-item">
                             <i class="align-middle mdi mdi-account-circle-outline fs-16"></i>
                             <span>My Account</span>
                         </a>
