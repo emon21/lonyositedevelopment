@@ -34,8 +34,10 @@
                                  <div class="align-items-center">
                                     <div class="d-flex align-items-center">
                                        {{-- <img src="{{asset('backend')}}/assets/images/users/user-11.jpg"
-                                          class="rounded-circle avatar-xxl img-thumbnail float-start" alt="image profile"> --}}
-                                          <img src="{{ asset($profile->photo ? 'uploads/admin/' . $profile->photo : 'uploads/no_image.jpg') }}"
+                                          class="rounded-circle avatar-xxl img-thumbnail float-start" alt="image profile">
+                                       --}}
+                                       <img
+                                          src="{{ asset($profile->photo ? 'uploads/admin/' . $profile->photo : 'uploads/no_image.jpg') }}"
                                           class="rounded-circle avatar-xxl img-thumbnail float-start" alt="image profile">
 
                                        <div class="overflow-hidden ms-4">
@@ -63,7 +65,7 @@
                                        <div class="row">
 
                                           <div class="row">
-                                             <!-- Personal Information --> 
+                                             <!-- Personal Information -->
                                              <div class="col-lg-6 col-xl-6">
                                                 <div class="mb-0 border card">
                                                    <div class="card-header">
@@ -75,90 +77,103 @@
                                                    </div>
 
                                                    <div class="card-body">
-                                                      <form action="{{ route('admin.profile.update', $profile) }}" method="POST" enctype="multipart/form-data">
+                                                      <form action="{{ route('admin.profile.update', $profile) }}"
+                                                         method="POST" enctype="multipart/form-data">
                                                          @csrf
-                                                      <div class="mb-3 form-group row">
-                                                         <label for="name" class="form-label">Full Name</label>
-                                                         <div class="col-lg-12 col-xl-12">
-                                                            <input class="form-control" type="text" name="name" id="name" value="{{ $profile->name }}" placeholder="Your Name....">
-                                                         </div>
-                                                      </div>
-
-                                                      <div class="mb-3 form-group row">
-                                                         <label class="form-label" for="email">Email Address</label>
-                                                         <div class="col-lg-12 col-xl-12">
-                                                            <div class="input-group">
-                                                               <span class="input-group-text"><i
-                                                                     class="mdi mdi-email"></i></span>
-                                                               <input type="text" class="form-control"
-                                                                 value="{{ $profile->email }}" placeholder="Email" id="email" name="email"
-                                                                  aria-describedby="basic-addon1" >
+                                                         <div class="mb-3 form-group row">
+                                                            <label for="name" class="form-label">Full Name</label>
+                                                            <div class="col-lg-12 col-xl-12">
+                                                               <input class="form-control" type="text" name="name"
+                                                                  id="name" value="{{ $profile->name }}"
+                                                                  placeholder="Your Name....">
                                                             </div>
                                                          </div>
-                                                      </div>
 
-                                                      <div class="mb-3 form-group row">
-                                                         <label class="form-label" for="phone">Contact Phone</label>
-                                                         <div class="col-lg-12 col-xl-12">
-                                                            <div class="input-group">
-                                                               <span class="input-group-text"><i
-                                                                     class="mdi mdi-phone-outline"></i></span>
-                                                               <input class="form-control" type="text" placeholder="Phone"
-                                                                  aria-describedby="basic-addon1" id="phone" name="phone" value="{{ $profile->phone }}">
+                                                         <div class="mb-3 form-group row">
+                                                            <label class="form-label" for="email">Email Address</label>
+                                                            <div class="col-lg-12 col-xl-12">
+                                                               <div class="input-group">
+                                                                  <span class="input-group-text"><i
+                                                                        class="mdi mdi-email"></i></span>
+                                                                  <input type="text" class="form-control"
+                                                                     value="{{ $profile->email }}" placeholder="Email"
+                                                                     id="email" name="email"
+                                                                     aria-describedby="basic-addon1">
+                                                               </div>
                                                             </div>
                                                          </div>
-                                                      </div>
 
-                                                       <fieldset class="mb-3 row">
-                                                <legend class="pt-0 col-form-label col-sm-2">Role</legend>
-                                                <div class="gap-2 col-sm-10 d-flex">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="role" id="gridRadios1" value="admin" 
-                                                        @if($profile->role == 'admin') checked @endif>
-                                                        <label class="form-check-label" for="gridRadios1">
-                                                            Admin
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="role" id="gridRadios2" value="user" {{ ($profile->role == 'user') ? 'checked' : '' }}>
-                                                        <label class="form-check-label" for="gridRadios2">
-                                                            User
-                                                        </label>
-                                                    </div>
-                                              </div>
-                                            </fieldset>
-
-                                                      <div class="mb-3">
-                                                        <label for="address" class="form-label">Address</label>
-                                                        <textarea class="form-control" id="address" rows="5" spellcheck="false" name="address" value="{{ $profile->address }}">{{ $profile->address }}</textarea>
-                                                    </div>
-
-                                                   <div class="mb-3 form-group">
-                                                         <label class="form-label">Photo</label>
-                                                         <div class="col-lg-12 col-xl-12">
-                                                            <input class="form-control" type="file" name="photo" id="photo">
+                                                         <div class="mb-3 form-group row">
+                                                            <label class="form-label" for="phone">Contact Phone</label>
+                                                            <div class="col-lg-12 col-xl-12">
+                                                               <div class="input-group">
+                                                                  <span class="input-group-text"><i
+                                                                        class="mdi mdi-phone-outline"></i></span>
+                                                                  <input class="form-control" type="text"
+                                                                     placeholder="Phone" aria-describedby="basic-addon1"
+                                                                     id="phone" name="phone" value="{{ $profile->phone }}">
+                                                               </div>
+                                                            </div>
                                                          </div>
 
-                                                      <!-- Image Preview -->
-                                                      <img src="{{ $profile->photo ? asset('uploads/admin/' . $profile->photo) : asset('uploads/no_image.jpg') }}" class="mt-2 rounded-circle avatar-xxl img-thumbnail" alt="image profile">
-                                                      </div>
+                                                         <fieldset class="mb-3 row">
+                                                            <legend class="pt-0 col-form-label col-sm-2">Role</legend>
+                                                            <div class="gap-2 col-sm-10 d-flex">
+                                                               <div class="form-check">
+                                                                  <input class="form-check-input" type="radio" name="role"
+                                                                     id="gridRadios1" value="admin"
+                                                                     @if($profile->role == 'admin') checked @endif>
+                                                                  <label class="form-check-label" for="gridRadios1">
+                                                                     Admin
+                                                                  </label>
+                                                               </div>
+                                                               <div class="form-check">
+                                                                  <input class="form-check-input" type="radio" name="role"
+                                                                     id="gridRadios2" value="user" {{ ($profile->role == 'user') ? 'checked' : '' }}>
+                                                                  <label class="form-check-label" for="gridRadios2">
+                                                                     User
+                                                                  </label>
+                                                               </div>
+                                                            </div>
+                                                         </fieldset>
 
-                                                      <!-- Image Upload -->
-                                                      {{-- <div class="mb-3">
+                                                         <div class="mb-3">
+                                                            <label for="address" class="form-label">Address</label>
+                                                            <textarea class="form-control" id="address" rows="5"
+                                                               spellcheck="false" name="address"
+                                                               value="{{ $profile->address }}">{{ $profile->address }}</textarea>
+                                                         </div>
+
+                                                         <div class="mb-3 form-group">
+                                                            <label class="form-label">Photo</label>
+                                                            <div class="col-lg-12 col-xl-12">
+                                                               <input class="form-control" type="file" name="photo"
+                                                                  id="photo">
+                                                            </div>
+
+                                                            <!-- Image Preview -->
+                                                            <img
+                                                               src="{{ $profile->photo ? asset('uploads/admin/' . $profile->photo) : asset('uploads/no_image.jpg') }}"
+                                                               class="mt-2 rounded-circle avatar-xxl img-thumbnail"
+                                                               alt="image profile">
+                                                         </div>
+
+                                                         <!-- Image Upload -->
+                                                         {{-- <div class="mb-3">
                                                             @if($profile->photo)
-                                                               <img src="{{ asset('uploads/admin/' . $profile->photo) }}"
-                                                                     width="160" height="160" class="mt-2 rounded-circle">
+                                                            <img src="{{ asset('uploads/admin/' . $profile->photo) }}"
+                                                               width="160" height="160" class="mt-2 rounded-circle">
                                                             @endif
-                                                      </div> --}}
+                                                         </div> --}}
 
-                                                    <div class="form-group">
-                                                         <div class="col-lg-12 col-xl-12">
-                                                            <button type="submit" class="btn btn-primary">
-                                                               Update Profile</button>
+                                                         <div class="form-group">
+                                                            <div class="col-lg-12 col-xl-12">
+                                                               <button type="submit" class="btn btn-primary">
+                                                                  Update Profile</button>
+                                                            </div>
                                                          </div>
-                                                      </div>
-                                                   </form>
-                                                </div><!--end card-body-->
+                                                      </form>
+                                                   </div><!--end card-body-->
 
                                                 </div>
                                              </div><!-- End Personal Information -->
@@ -176,35 +191,37 @@
                                                    </div>
 
                                                    <div class="mb-0 card-body">
-                                                      <div class="mb-3 form-group row">
-                                                         <label class="form-label">Old Password</label>
-                                                         <div class="col-lg-12 col-xl-12">
-                                                            <input class="form-control" type="password"
-                                                               placeholder="Old Password">
+                                                      <form action="{{ route('admin.update.password') }}" method="POST">
+                                                         @csrf
+                                                         <div class="mb-3 form-group row">
+                                                            <label class="form-label">Old Password</label>
+                                                            <div class="col-lg-12 col-xl-12">
+                                                               <input class="form-control" type="password"
+                                                                  placeholder="Old Password" name="old_password" id="old_password">
+                                                            </div>
                                                          </div>
-                                                      </div>
-                                                      <div class="mb-3 form-group row">
-                                                         <label class="form-label">New Password</label>
-                                                         <div class="col-lg-12 col-xl-12">
-                                                            <input class="form-control" type="password"
-                                                               placeholder="New Password">
+                                                         <div class="mb-3 form-group row">
+                                                            <label class="form-label">New Password</label>
+                                                            <div class="col-lg-12 col-xl-12">
+                                                               <input class="form-control" type="password"
+                                                                  placeholder="New Password" name="new_password" id="new_password">
+                                                            </div>
                                                          </div>
-                                                      </div>
-                                                      <div class="mb-3 form-group row">
-                                                         <label class="form-label">Confirm Password</label>
-                                                         <div class="col-lg-12 col-xl-12">
-                                                            <input class="form-control" type="password"
-                                                               placeholder="Confirm Password">
+                                                         <div class="mb-3 form-group row">
+                                                            <label class="form-label">Confirm Password</label>
+                                                            <div class="col-lg-12 col-xl-12">
+                                                               <input class="form-control" type="password"
+                                                                  placeholder="Confirm Password"  name="new_password_confirmation">
+                                                            </div>
                                                          </div>
-                                                      </div>
 
-                                                      <div class="form-group row">
-                                                         <div class="col-lg-12 col-xl-12">
-                                                            <button type="submit" class="btn btn-primary">
-                                                               Change Password</button>
+                                                         <div class="form-group row">
+                                                            <div class="col-lg-12 col-xl-12">
+                                                               <button type="submit" class="btn btn-primary">
+                                                                  Change Password</button>
+                                                            </div>
                                                          </div>
-                                                      </div>
-
+                                                      </form>
                                                    </div><!--end card-body-->
                                                 </div>
                                              </div> <!-- End Change Password -->

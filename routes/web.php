@@ -43,13 +43,17 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
     // Route::get('/profile', [AdminController::class, 'AdminProfile'])->name('admin/profile');
     // Route::post('/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin/profile/store');
-    
+
     // Route::get('/change/password', [AdminController::class, 'AdminChangePassword'])->name('admin/change/password');
     // Route::post('/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('admin/update/password');
 
     // Admin Profile
     Route::get('/profile', [AdminController::class, 'Profile'])->name('profile');
     Route::post('/profile/update', [AdminController::class, 'ProfileUpdate'])->name('profile.update');
+
+    // password update
+    Route::get('/change/password', [AdminController::class, 'ChangePassword'])->name('change.password');
+    Route::post('/update/password', [AdminController::class, 'UpdatePassword'])->name('update.password');
 
 });
 

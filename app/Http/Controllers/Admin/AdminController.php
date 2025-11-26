@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\VerificationMail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\VerificationMail;
 
 class AdminController extends Controller
 {
@@ -207,5 +208,52 @@ class AdminController extends Controller
         if (file_exists($fullPath)) {
             unlink($fullPath);
         }
+    }
+
+    # ChangePassword
+    public function ChangePassword(){
+        return view('backend.profile.change-password');
+    }
+
+    # UpdatePassword
+    public function UpdatePassword(Request $request){
+        // validation
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+
+        $user = Auth::user();
+        // Check Old Password
+        if(!Hash::check($request->old_password, $user->password)){
+            return back()->with('error','Old Password Does Not Match');
+        }
+
+        // Update The New Password
+        User::whereId($user->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        // change password after logout
+        Auth::logout();
+
+        // more code
+        // $user->password = Hash::make($request->new_password);
+        // $user->save();
+
+        return redirect()->route('login')->with('success','Password Changed Successfully');
+
+
+        // // Match The Old Password
+        // if(!Hash::check($request->old_password, auth()->user()->password)){
+        //     return back()->with('error','Old Password Does Not Match');
+        // }
+
+        // // Update The New Password
+        // User::whereId(auth()->user()->id)->update([
+        //     'password' => Hash::make($request->new_password)
+        // ]);
+
+        // return back()->with('success','Password Changed Successfully');
     }
 }
