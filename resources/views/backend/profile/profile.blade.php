@@ -196,15 +196,21 @@
                                                          <div class="mb-3 form-group row">
                                                             <label class="form-label">Old Password</label>
                                                             <div class="col-lg-12 col-xl-12">
-                                                               <input class="form-control" type="password"
-                                                                  placeholder="Old Password" name="old_password" id="old_password">
+                                                               <input class="form-control @error('old_password') is-invalid @enderror" type="password"
+                                                                  placeholder="Old Password" name="old_password" id="old_password" value="{{ old('old_password')}}">
+                                                                  @error('old_password')
+                                                                  <span class="py-2 text-danger">{{ $message }}</span>
+                                                                  @enderror
                                                             </div>
                                                          </div>
                                                          <div class="mb-3 form-group row">
                                                             <label class="form-label">New Password</label>
                                                             <div class="col-lg-12 col-xl-12">
-                                                               <input class="form-control" type="password"
-                                                                  placeholder="New Password" name="new_password" id="new_password">
+                                                               <input class="form-control @error('new_password') is-invalid @enderror" type="password"
+                                                                  placeholder="New Password" name="new_password" id="new_password" value="{{ old('new_password')}}">
+                                                                  @error('new_password')
+                                                                  <span class="py-2 text-danger">{{ $message }}</span>
+                                                                  @enderror
                                                             </div>
                                                          </div>
                                                          <div class="mb-3 form-group row">
@@ -212,6 +218,7 @@
                                                             <div class="col-lg-12 col-xl-12">
                                                                <input class="form-control" type="password"
                                                                   placeholder="Confirm Password"  name="new_password_confirmation">
+                                                                  
                                                             </div>
                                                          </div>
 

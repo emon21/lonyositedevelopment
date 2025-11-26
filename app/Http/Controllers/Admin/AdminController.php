@@ -14,64 +14,64 @@ class AdminController extends Controller
 {
     // Admin Logout
 
-    public function AdminLogout(Request $request){
+    public function AdminLogout(Request $request)
+    {
 
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         // return redirect('/admin/login');
         return redirect('/');
-
     }
 
     //AdminLogin
-    public function AdminLogin(Request $request){
+    public function AdminLogin(Request $request)
+    {
 
-        $userInfo = $request->only('email','password');
+        $userInfo = $request->only('email', 'password');
 
-        if(Auth::attempt($userInfo)){
+        if (Auth::attempt($userInfo)) {
             $user = Auth::user();
 
-            $verificationCode = random_int(100000,999999);
+            $verificationCode = random_int(100000, 999999);
             $name = Auth::user()->name;
 
             session([
-                'verification_code' =>$verificationCode,
+                'verification_code' => $verificationCode,
                 'user_id' => $user->id
             ]);
 
-            Mail::to($user->email)->send(new VerificationMail($verificationCode,$name));
+            Mail::to($user->email)->send(new VerificationMail($verificationCode, $name));
 
             Auth::logout();
 
-            return redirect()->route('custom.verification.user')->with('status','Verification Code sent to your mail');
-            
+            return redirect()->route('custom.verification.user')->with('status', 'Verification Code sent to your mail');
+
 
             return redirect()->back()->withErrors([
                 'email' => 'Invalid Credentials P rovided'
             ]);
-
         }
-
-
     }
 
 
     # VerificationUser
-    public function VerificationUser(){
+    public function VerificationUser()
+    {
         return view('auth.verify');
     }
 
 
     # VerifyUser
-    public function VerificationVerify(Request $request){
-        
+    public function VerificationVerify(Request $request)
+    {
+
         $request->validate([
 
             'code' => 'required|numeric'
         ]);
 
-        if($request->code == session('verification_code')){
+        if ($request->code == session('verification_code')) {
             // return redirect()->back()->withErrors([
             //     'verification_code' => 'Verification Code is required'
             // ]);
@@ -112,17 +112,19 @@ class AdminController extends Controller
 
 
     # Profile
-    public function Profile(){
+    public function Profile()
+    {
         // login yes/no
-    //    $userId = Auth::check();
+        //    $userId = Auth::check();
 
-       $userId = Auth::user();
-       $profileData = User::find($userId->id);
-        return view('backend/profile/profile',['profile'=>$profileData]);
+        $userId = Auth::user();
+        $profileData = User::find($userId->id);
+        return view('backend/profile/profile', ['profile' => $profileData]);
     }
 
     # ProfileUpdate
-    public function ProfileUpdate(Request $request){
+    public function ProfileUpdate(Request $request)
+    {
         $userId = Auth::user();
         $profile = User::find($userId->id);
 
@@ -134,7 +136,7 @@ class AdminController extends Controller
 
         $oldPhotoPath = $profile->photo;
         # Profile Picture upload
-        if($request->hasFile('photo')){
+        if ($request->hasFile('photo')) {
 
             $file = $request->file('photo');
 
@@ -150,16 +152,16 @@ class AdminController extends Controller
             // }
 
             // upload photo
-            $ImageUrl = date('YmdHi').'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('uploads/admin/'),$ImageUrl);
+            $ImageUrl = date('YmdHi') . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/admin/'), $ImageUrl);
             // $profileData['photo'] = $ImageUrl;
 
             // database image full path store this code //DB -> photo 'ulods/admin/202407231234.jpg' field e full path save hobe
-        //    $path = 'uploads/admin/';
-        //    $profileData->photo = $path . $ImageUrl;
+            //    $path = 'uploads/admin/';
+            //    $profileData->photo = $path . $ImageUrl;
 
-           // database image name store this code //DB -> photo '202407231234.jpg' field e image name save hobe
-           $profile->photo = $ImageUrl;
+            // database image name store this code //DB -> photo '202407231234.jpg' field e image name save hobe
+            $profile->photo = $ImageUrl;
 
             // $profileData->save();
 
@@ -179,13 +181,12 @@ class AdminController extends Controller
             // if($oldPhotoPath && $oldPhotoPath !== $ImageUrl && file_exists(public_path('uploads/admin/' . $oldPhotoPath))){
             //     unlink(public_path('uploads/admin/' . $oldPhotoPath));
             // }
-            
-            if($oldPhotoPath && $oldPhotoPath !== $ImageUrl){
+
+            if ($oldPhotoPath && $oldPhotoPath !== $ImageUrl) {
                 $this->deleteOldImage($oldPhotoPath);
-                
+
                 // unlink(public_path('uploads/admin/' . $oldPhotoPath));
             }
-
         }
 
 
@@ -196,7 +197,17 @@ class AdminController extends Controller
         $profile->updated_at = now();
         $profile->save();
 
-        return redirect()->back()->with('success','Profile Updated Successfully');
+        // $profile->update($profileData);
+
+        // notification 
+
+         $notification = [
+                'message' => 'Profile Updated Successfully',
+                'alert-type' => 'success',
+                'title' => 'Success!!'
+            ];
+
+        return redirect()->back()->with($notification);
     }
 
 
@@ -211,22 +222,34 @@ class AdminController extends Controller
     }
 
     # ChangePassword
-    public function ChangePassword(){
+    public function ChangePassword()
+    {
         return view('backend.profile.change-password');
     }
 
     # UpdatePassword
-    public function UpdatePassword(Request $request){
+    public function UpdatePassword(Request $request)
+    {
+
+        $user = Auth::user();
+
         // validation
         $request->validate([
             'old_password' => 'required',
             'new_password' => 'required|confirmed',
         ]);
 
-        $user = Auth::user();
         // Check Old Password
-        if(!Hash::check($request->old_password, $user->password)){
-            return back()->with('error','Old Password Does Not Match');
+        if (!Hash::check($request->old_password, $user->password)) {
+
+
+            $notification = [
+                'message' => 'Old Password Does Not Match!',
+                'alert-type' => 'error',
+                'title' => 'Sorry!'
+            ];
+
+            return back()->with($notification);
         }
 
         // Update The New Password
@@ -240,8 +263,12 @@ class AdminController extends Controller
         // more code
         // $user->password = Hash::make($request->new_password);
         // $user->save();
+        $notification = [
+            'message' => 'Password Changed Successfully',
+            'alert-type' => 'success'
+        ];
 
-        return redirect()->route('login')->with('success','Password Changed Successfully');
+        return redirect()->route('login')->with($notification);
 
 
         // // Match The Old Password
