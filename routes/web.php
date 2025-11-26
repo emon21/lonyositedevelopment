@@ -27,3 +27,10 @@ require __DIR__.'/auth.php';
 
 // Admin Logout
 Route::post('admin/logout',[AdminController::class,'AdminLogout'])->name('admin-logout');
+
+Route::post('admin/login',[AdminController::class,'AdminLogin'])->name('admin.login');
+
+# Verification User
+Route::get('/verify',[AdminController::class,'VerificationUser'])->name('custom.verification.user');
+# Verification Verify
+Route::post('/verify', [AdminController::class, 'VerificationVerify'])->name('custom.verification.verify');
