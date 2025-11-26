@@ -38,7 +38,12 @@
                                 </div>
 
                                 <div class="pt-0">
-                                    <form class="my-4" method="POST" action="{{ route('admin.login') }}">
+                                    <!-- Two Factor Authentication -->
+                                    <h4 class="mt-0 mb-3">Sign In</h4>
+                                    <p class="text-muted mb-4">Enter your email address and password to access admin panel.</p>
+                                    
+                                    {{-- <form class="my-4" method="POST" action="{{ route('admin.login') }}"> --}}
+                                    <form class="my-4" method="POST" action="{{ route('login') }}">
                                         @csrf
 
                                         @if(session('error'))
