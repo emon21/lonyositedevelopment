@@ -20,21 +20,24 @@
               <li class="menu-item-has-children">
                 <a href="#">About Us</a>
                 <ul class="sub-menu">
-                  <li><a href="{{ url('/about-us') }}">Company Profile</a></li>
-                  <li><a href="{{ url('/pricing') }}">Team</a></li>              
+                  <li><a href="{{ route('about') }}">Company Profile</a></li>
+                  <li><a href="{{ route('team') }}">Team</a></li>              
                 </ul>
               </li>
               <li>
-                <a href="#">Our Service</a>
+                <a href="{{ route('service') }}">Our Service</a>
               </li> 
               <li>
-                <a href="#">Portfolio</a>
+                <a href="{{ route('portfolio') }}">Portfolio</a>
               </li>
               <li>
-                <a href="#">Blog</a>
+                <a href="{{ route('blog') }}">Blog</a>
               </li>
               <li>
-                <a href="contact-us.html">Contact</a>
+                <a href="{{ route('career') }}">Career</a>
+              </li>
+              <li>
+                <a href="{{ route('contact') }}">Contact</a>
               </li>
             </ul>
           </nav>

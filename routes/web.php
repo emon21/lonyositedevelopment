@@ -3,11 +3,47 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Frontend\FrontendController;
 
 Route::get('/', function () {
 
     return view('frontend/index');
+
 });
+
+
+# ===============  Frontend Route =============== #
+
+# route group
+// Route::prefix('user')->middleware(['auth'])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('frontend/user/dashboard');
+//     })->name('user.dashboard');
+
+//     Route::get('/profile', function () {
+//         return view('frontend/user/profile');
+//     })->name('user.profile');
+
+// });
+
+// Route::get('/',[FrontendController::class,'index'])->name('home');
+
+// about
+Route::get('about-us',[FrontendController::class,'about'])->name('about');
+
+//team
+Route::get('team',[FrontendController::class,'team'])->name('team');
+//service
+Route::get('service',[FrontendController::class,'service'])->name('service');
+//portfolio
+Route::get('portfolio',[FrontendController::class,'portfolio'])->name('portfolio');
+// blog route
+Route::get('blog',[FrontendController::class,'blog'])->name('blog');
+//career
+Route::get('career',[FrontendController::class,'career'])->name('career');
+// contact
+Route::get('contact-us',[FrontendController::class,'contact'])->name('contact');
+
 
 // Dashboard
 Route::get('/dashboard', function () {
@@ -20,6 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__ . '/auth.php';
 
