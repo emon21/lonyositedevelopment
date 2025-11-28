@@ -42,6 +42,25 @@
                             <li class="menu-title">Pages</li>
 
                             <li>
+                                <a href="#review" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Review </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="review">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.review.index') }}" class="tp-link">All Review</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.review.create') }}" class="tp-link">Review Create</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
                                 <a href="#sidebarAuth" data-bs-toggle="collapse">
                                     <i data-feather="users"></i>
                                     <span> Authentication </span>

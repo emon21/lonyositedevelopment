@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 Route::get('/', function () {
@@ -92,10 +93,21 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::get('/change/password', [AdminController::class, 'ChangePassword'])->name('change.password');
     Route::post('/update/password', [AdminController::class, 'UpdatePassword'])->name('update.password');
 
+    # Review
+    // Route::get('/review', [ReviewController::class, 'index'])->name('review');
+
+    Route::controller(ReviewController::class)->group(function () {
+        Route::get('/review', 'index')->name('review.index');
+        Route::get('/review/create', 'create')->name('review.create');
+        Route::post('/review', 'store')->name('review.store');
+        Route::get('/review/{review}', 'show')->name('review.show');
+        Route::get('/review/{review}/edit', 'edit')->name('review.edit');
+        Route::put('/review/{review}', 'update')->name('review.update');
+        Route::delete('/review/{review}', 'destroy')->name('review.destroy');
+    });
+    
+
 });
-
-
-
 
 
 # =========== Admin Route List =========== #
