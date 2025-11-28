@@ -49,9 +49,11 @@
                            <td>{{ $review->name }}</td>
                            <td>{{ $review->position }}</td>
                            <td>
+                              
                               {{-- {{ asset('uploads/review/' . $review->photo) }}
                               {{ $profile->photo ? asset('uploads/review/' . $profile->photo) : asset('uploads/no_image.jpg')
                               }} --}}
+
                               <img
                                  src="{{ $review->photo ? asset('uploads/review/' . $review->photo) : asset('uploads/no_image.jpg') }}"
                                  alt="Review Image" style="width: 80px; height: 50px;">
