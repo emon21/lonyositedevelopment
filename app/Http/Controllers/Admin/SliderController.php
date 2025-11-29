@@ -91,4 +91,30 @@ class SliderController extends Controller
         return redirect()->route('admin.slider.index')->with($notification);
     }
 
+    # Frontend Slider Edit EditSlider
+
+    public function EditSlider(Request $request,$id){
+
+        $slider = Slider::findOrFail($id);
+        // return view('frontend.components.slider_edit', compact('slider'));
+
+        if($request->has('title')){
+
+            $slider->title = $request->title;
+
+          
+            # notification helper function
+            // $notification = ToasterNotification::Toaster('Slider Updated Successfully....','success', 'Updated Slider');
+            // return redirect()->back()->with($notification);
+        }
+
+        if($request->has('description')){
+            $slider->description = $request->description;
+        }
+
+        $slider->save();
+        return response()->json(['message' => 'Slider updated successfully']);
+        // return response()->json(['success' => true]);
+    }
+
 }

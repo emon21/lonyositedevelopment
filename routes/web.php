@@ -116,6 +116,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::get('/slider/{slider}/edit', 'edit')->name('slider.edit');
         Route::put('/slider/{slider}', 'update')->name('slider.update');
         Route::delete('/slider/{slider}', 'destroy')->name('slider.destroy');
+
+        // frontend slider
+        Route::post('/edit-slider/{id}', 'EditSlider');
     });
     
 });

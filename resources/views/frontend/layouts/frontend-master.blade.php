@@ -28,6 +28,9 @@
   <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/main.css">
   <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/app.min.css">
 
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 <body>
 
@@ -128,6 +131,16 @@
 
   <!-- scripts -->
  @stack('frontend-js')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+
+  // @if(Session::has('message'))
+  //   toastr["{{ Session::get('alert-type') }}"](
+  //   "{{ Session::get('message') }}",
+  //   );
+  // @endif
+</script>
 
 </body>
 </html>
