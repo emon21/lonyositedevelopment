@@ -42,6 +42,25 @@
                             <li class="menu-title">Pages</li>
 
                             <li>
+                                <a href="#slider" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Slider </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="slider">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.slider.index') }}" class="tp-link">All Slider</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.slider.create') }}" class="tp-link">Slider Create</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <li>
                                 <a href="#review" data-bs-toggle="collapse">
                                     <i data-feather="users"></i>
                                     <span> Review </span>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 Route::get('/', function () {
@@ -105,8 +106,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::put('/review/{review}', 'update')->name('review.update');
         Route::delete('/review/{review}', 'destroy')->name('review.destroy');
     });
-    
 
+    # Slider 
+    Route::controller(SliderController::class)->group(function () {
+        Route::get('/slider', 'index')->name('slider.index');
+        Route::get('/slider/create', 'create')->name('slider.create');
+        Route::post('/slider', 'store')->name('slider.store');
+        Route::get('/slider/{slider}', 'show')->name('slider.show');
+        Route::get('/slider/{slider}/edit', 'edit')->name('slider.edit');
+        Route::put('/slider/{slider}', 'update')->name('slider.update');
+        Route::delete('/slider/{slider}', 'destroy')->name('slider.destroy');
+    });
+    
 });
 
 

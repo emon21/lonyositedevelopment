@@ -136,18 +136,16 @@
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
 
     <!-- axios cdn -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script> --}}
+
+     <!-- Axios CDN -->
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
     {{--
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> --}}
     <script>
-        axios.get('/user/12345')
-            .then(function (response) {
-                console.log(response.data);
-                console.log(response.status);
-                console.log(response.statusText);
-                console.log(response.headers);
-                console.log(response.config);
-            });
+        
     </script>
 
     <!-- Toastr js-->

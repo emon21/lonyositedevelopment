@@ -49,7 +49,7 @@
                            <td>{{ $review->name }}</td>
                            <td>{{ $review->position }}</td>
                            <td>
-                              
+
                               {{-- {{ asset('uploads/review/' . $review->photo) }}
                               {{ $profile->photo ? asset('uploads/review/' . $profile->photo) : asset('uploads/no_image.jpg')
                               }} --}}
@@ -78,7 +78,6 @@
          </div> <!--end All Review Information-->
       </div>
       <!-- End page content -->
-
    </div>
    <!-- Ent content -->
 @endsection

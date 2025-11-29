@@ -91,13 +91,13 @@ class ReviewController extends Controller
         // Image Delete using Helper Function
         // FileUpload::deleteImage($review->photo);
         // old image delete
+        
         FileUpload::deleteImage('uploads/review/' . $review->photo);
-
+        
         # notification helper function
         $notification = ToasterNotification::Toaster('Review Deleted Successfully', 'error', 'Deleted');
 
         return redirect()->route('admin.review.index')->with($notification);
-
-          
+      
     }
 }
