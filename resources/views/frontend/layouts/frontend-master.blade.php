@@ -129,8 +129,7 @@
     
    <!-- Footer  -->
 
-  <!-- scripts -->
- @stack('frontend-js')
+ 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
@@ -141,6 +140,13 @@
   //   );
   // @endif
 </script>
+
+
+<!-- Axios CDN -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+ <!-- scripts -->
+ @stack('frontend-js')
 
 </body>
 </html>

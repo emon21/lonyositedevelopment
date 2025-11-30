@@ -10,7 +10,6 @@ use App\Http\Controllers\Frontend\FrontendController;
 Route::get('/', function () {
 
     return view('frontend/index');
-
 });
 
 
@@ -31,20 +30,20 @@ Route::get('/', function () {
 // Route::get('/',[FrontendController::class,'index'])->name('home');
 
 // about
-Route::get('about-us',[FrontendController::class,'about'])->name('about');
+Route::get('about-us', [FrontendController::class, 'about'])->name('about');
 
 //team
-Route::get('team',[FrontendController::class,'team'])->name('team');
+Route::get('team', [FrontendController::class, 'team'])->name('team');
 //service
-Route::get('service',[FrontendController::class,'service'])->name('service');
+Route::get('service', [FrontendController::class, 'service'])->name('service');
 //portfolio
-Route::get('portfolio',[FrontendController::class,'portfolio'])->name('portfolio');
+Route::get('portfolio', [FrontendController::class, 'portfolio'])->name('portfolio');
 // blog route
-Route::get('blog',[FrontendController::class,'blog'])->name('blog');
+Route::get('blog', [FrontendController::class, 'blog'])->name('blog');
 //career
-Route::get('career',[FrontendController::class,'career'])->name('career');
+Route::get('career', [FrontendController::class, 'career'])->name('career');
 // contact
-Route::get('contact-us',[FrontendController::class,'contact'])->name('contact');
+Route::get('contact-us', [FrontendController::class, 'contact'])->name('contact');
 
 
 // Dashboard
@@ -117,10 +116,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::put('/slider/{slider}', 'update')->name('slider.update');
         Route::delete('/slider/{slider}', 'destroy')->name('slider.destroy');
 
-        // frontend slider
+        // frontend slider Edit
         Route::post('/edit-slider/{id}', 'EditSlider');
+        Route::post('/edit-siteTitle/{id}', 'EditSiteTitle');
     });
-    
 });
 
 

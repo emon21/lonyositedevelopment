@@ -1,3 +1,9 @@
+@php
+
+$title = App\Models\SiteTitle::latest()->first();
+
+@endphp
+
 <div class="lonyo-section-padding bg-heading position-relative sectionn">
     <div class="container">
       <div class="row">
@@ -14,7 +20,8 @@
         </div>
         <div class="col-lg-7 d-flex align-items-center">
           <div class="lonyo-default-content lonyo-video-section pl-50" data-aos="fade-up" data-aos-duration="500">
-            <h2>Its usability is simple and intuitive for users</h2>
+            <h2 id="usability_title" class="p-4 rounded" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
+              data-id="{{ $title->id }}">{{ $title->usability }}</h2>
             <p>It's a cloud-based accounting tool ideal for individuals & businesses to easily manage finances, invoices & payroll. Unlock the 3-step path to enhanced financial control. </p>
             <div class="mt-50" data-aos="fade-up" data-aos-duration="700">
               <a class="lonyo-default-btn video-btn" href="contact-us.html">Download the app</a>
@@ -69,3 +76,77 @@
   <div class="lonyo-content-shape1">
     <img src="{{ asset('frontend') }}/assets/images/shape/shape3.svg" alt="">
   </div>
+
+  @push('frontend-js')
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const title = document.getElementById("usability_title");
+
+
+        /**
+         * ============================================
+         *  SAVE CHANGES FUNCTION (Axios + Vanilla JS)
+         * ============================================
+         */
+        // Save Function
+        function saveChanges(element) {
+
+          let titleId = element.dataset.id;
+          let field = element.id === "usability_title" ? "usability" : "";
+          let newValue = element.innerText.trim();
+
+          // axios api
+          axios.post(`/admin/edit-siteTitle/${titleId}`, {
+            [field]: newValue
+          })
+            .then(function (response) {
+              if (response.data.message) {
+                // console.log(field + " " + response.data.message);
+                // SUCCESS MESSAGE
+                toastr.success("Usability Title Updated Successfully!");
+
+              } else {
+                console.error("Update failed:", response.data.message);
+              }
+
+              // console.log(`${field} updated successfully`);
+            })
+            .catch(function (error) {
+              console.error("Failed to update:", error);
+              // ERROR MESSAGE
+              toastr.error("Something went wrong!");
+            });
+        }
+
+        /**
+         * ============================================
+         *  AUTO SAVE ON PRESSING ENTER
+         * ============================================
+         */
+
+        // auto save on Enter key
+        // Auto Save When Press Enter
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            saveChanges(e.target);
+          }
+
+        });
+
+        /**
+         * ============================================
+         *  AUTO SAVE WHEN LOSING FOCUS (blur)
+         * ============================================
+         */
+
+        // Auto Save On Losing Focus
+        title.addEventListener("blur", function () {
+          saveChanges(title);
+        })
+
+      });
+
+    </script>
+
+  @endpush
