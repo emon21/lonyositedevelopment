@@ -30,8 +30,8 @@ class DatabaseSeeder extends Seeder
             // CareerSeeder::class,
             // FaqSeeder::class,
             // SettingSeeder::class,
-            SiteTitleSeeder::class
-
+            SiteTitleSeeder::class,
+            FeatureSeeder::class
         ]);
     }
 }

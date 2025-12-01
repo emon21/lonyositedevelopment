@@ -55,7 +55,24 @@
                                         <li>
                                             <a href="{{ route('admin.slider.create') }}" class="tp-link">Slider Create</a>
                                         </li>
-                                        
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <li>
+                                <a href="#feature" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Feature Setup</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="feature">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.feature.index') }}" class="tp-link">All Feature</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.feature.create') }}" class="tp-link">Feature Create</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

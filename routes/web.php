@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\admin\SliderController;
+use App\Http\Controllers\admin\FeatureController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 Route::get('/', function () {
@@ -118,7 +119,28 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
         // frontend slider Edit
         Route::post('/edit-slider/{id}', 'EditSlider');
+        //fronten all Site Title Edit
         Route::post('/edit-siteTitle/{id}', 'EditSiteTitle');
+    });
+
+
+    # Feature
+    Route::controller(FeatureController::class)->group(function () {
+
+        Route::get('/feature', 'index')->name('feature.index');
+        Route::get('/feature/create', 'create')->name('feature.create');
+        Route::post('/feature', 'store')->name('feature.store');
+        Route::get('/feature/{feature}', 'show')->name('feature.show');
+        Route::get('/feature/{feature}/edit', 'edit')->name('feature.edit');
+        Route::put('/feature/{feature}', 'update')->name('feature.update');
+        Route::delete('/feature/{feature}', 'destroy')->name('feature.destroy');
+
+        // Duplicate        
+        Route::post('/feature/duplicate/{id}','duplicate')->name('feature.duplicate');
+
+        // Restore
+        Route::get('/feature-restore','DataRestore')->name('feature.restore');
+
     });
 });
 
