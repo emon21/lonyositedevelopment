@@ -78,6 +78,22 @@
                             </li>
                             
                             <li>
+                                <a href="#clarifi" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Clarifi Setup</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="clarifi">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.clarifi.index') }}" class="tp-link">Get Clarifi</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <li>
                                 <a href="#review" data-bs-toggle="collapse">
                                     <i data-feather="users"></i>
                                     <span> Review </span>

@@ -1,6 +1,6 @@
 @php
 
-$title = App\Models\SiteTitle::latest()->first();
+$title = App\Models\SiteTitle::latest()->limit(6)->first();
 $features = App\Models\Feature::latest()->get();
 
 @endphp

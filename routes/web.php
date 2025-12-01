@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\admin\SliderController;
+use App\Http\Controllers\admin\ClarifiController;
 use App\Http\Controllers\admin\FeatureController;
 use App\Http\Controllers\Frontend\FrontendController;
 
@@ -142,6 +144,28 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::get('/feature-restore','DataRestore')->name('feature.restore');
 
     });
+
+
+    # Clarifi
+    // Route::controller(ClarifiController::class)->group(function () {
+
+    //     Route::get('/clarifi', 'index')->name('clarifi.index');
+    //     Route::get('/clarifi/create', 'create')->name('clarifi.create');
+    //     Route::post('/clarifi', 'store')->name('clarifi.store');
+    //     Route::get('/clarifi/{clarifi}', 'show')->name('clarifi.show');
+    //     Route::get('/clarifi/{clarifi}/edit', 'edit')->name('clarifi.edit');
+    //     Route::put('/clarifi/{clarifi}', 'update')->name('clarifi.update');
+    //     Route::delete('/clarifi/{clarifi}', 'destroy')->name('clarifi.destroy');
+ 
+    // });
+    
+    Route::controller(HomeController::class)->group(function () {
+
+        Route::get('/clarifi', 'Getclarifis')->name('clarifi.index');
+        Route::put('/clarifi/{id}', 'UpdateClarifi')->name('clarifi.update');
+        
+    });
+
 });
 
 
