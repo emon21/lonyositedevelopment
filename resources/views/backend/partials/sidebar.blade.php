@@ -122,6 +122,26 @@
                                     </ul>
                                 </div>
                             </li>
+
+                             <li>
+                                <a href="#usability_connect" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Usability Connect Setup</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="usability_connect">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.usability-connect') }}" class="tp-link">
+                                                All Usability Connect</a>
+                                        </li>
+                                           <li>
+                                            <a href="{{ route('admin.usability-connect.create') }}" class="tp-link">
+                                                Add Usability Connect</a>
+                                        </li>  
+                                    </ul>
+                                </div>
+                            </li>
                             
                             <li>
                                 <a href="#review" data-bs-toggle="collapse">

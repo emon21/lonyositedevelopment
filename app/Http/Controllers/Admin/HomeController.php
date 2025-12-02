@@ -7,20 +7,23 @@ use App\Models\Financial;
 use App\Models\Usability;
 use App\Helpers\FileUpload;
 use Illuminate\Http\Request;
+use App\Models\UsabilityConnect;
 use App\Helpers\ToasterNotification;
 use App\Http\Controllers\Controller;
 
 
 class HomeController extends Controller
 {
-    
+
     # clarifis
-    public function Getclarifis(){
+    public function Getclarifis()
+    {
         $clarifi = Clarifi::find(1);
-        return view('backend/clarifi/get_clarifi',compact('clarifi'));
+        return view('backend/clarifi/get_clarifi', compact('clarifi'));
     }
-    
-    public function UpdateClarifi(Request $request,$id){
+
+    public function UpdateClarifi(Request $request, $id)
+    {
         $clarifi = Clarifi::find($id);
 
         $clarifi->title = $request->title;
@@ -59,13 +62,15 @@ class HomeController extends Controller
     }
 
 
-     # clarifis
-    public function GetUsability(){
+    # clarifis
+    public function GetUsability()
+    {
         $usability = Usability::find(1);
-        return view('backend/usability/get_usability',compact('usability'));
+        return view('backend/usability/get_usability', compact('usability'));
     }
-    
-    public function UpdateUsability(Request $request,$id){
+
+    public function UpdateUsability(Request $request, $id)
+    {
         $usability = Usability::find($id);
 
         $usability->title = $request->title;
@@ -89,4 +94,69 @@ class HomeController extends Controller
         return redirect()->route('admin.get.usability')->with($notification);
     }
 
+    //UsabilityConnect
+    public function UsabilityConnect()
+    {
+        $UsabilityConnect = UsabilityConnect::latest()->get();
+        return view('backend/usability/all_connect', compact('UsabilityConnect'));
+    }
+
+    // UsabilityConnectCreate
+    public function UsabilityConnectCreate()
+    {
+        return view('backend/usability/create');
+    }
+    public function UsabilityConnectStore(Request $request)
+    {
+
+        $connect = new UsabilityConnect();
+        $connect->title = $request->title;
+        $connect->description = $request->description;
+        $connect->save();
+
+        # notification helper function
+        $notification = ToasterNotification::Toaster('Usability Connect Created Successfully', 'success', title: 'Created');
+        return redirect()->route('admin.usability-connect')->with($notification);
+    }
+
+    // UsabilityConnectEdit
+    public function UsabilityConnectEdit($id)
+    {
+        $connect = UsabilityConnect::find($id);
+        return view('backend/usability/edit', compact('connect'));
+    }
+
+    // UsabilityConnectUpdate
+    public function UsabilityConnectUpdate(Request $request, $id)
+    {
+
+        $connect = UsabilityConnect::find($id);
+        $connect->title = $request->title;
+        $connect->description = $request->description;
+        $connect->save();
+
+        # notification helper function
+        $notification = ToasterNotification::Toaster('Usability Connect Updated Successfully', 'info
+        ', title: 'Updated');
+        return redirect()->route('admin.usability-connect')->with($notification);
+    }
+
+    // UsabilityConnectDelete
+    public function UsabilityConnectDelete($id)
+    {
+        UsabilityConnect::find($id)->delete();
+        # notification helper function
+        $notification = ToasterNotification::Toaster('Usability Connect Deleted Successfully', 'error', title: 'Deleted');
+        return redirect()->route('admin.usability-connect')->with($notification);
+    }
+
+    // UpdateUsabilityConnect For Frontend
+    public function UpdateUsabilityConnect(Request $request)
+    {
+        $connect = UsabilityConnect::find($request->id);
+        $connect->{$request->field} = $request->value;
+        $connect->save();
+
+        return response()->json(['message' => 'Updated Usability Connect successfully']);
+    }
 }

@@ -166,16 +166,39 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
         
     });
-    //get.usability
+
+    // financial
+    Route::get('/financial', [HomeController::class, 'Financial'])->name('financial');
+    Route::post('/financial/update-field', [HomeController::class, 'UpdateFinancial'])->name('financial.update');
+
+    // usability
 
     Route::controller(HomeController::class)->group(function () {
 
         Route::get('/usability', 'GetUsability')->name('get.usability');
         Route::put('/usability/{id}', 'UpdateUsability')->name('usability.update');
-    });
 
-    Route::get('/financial', [HomeController::class, 'Financial'])->name('financial');
-    Route::post('/financial/update-field', [HomeController::class, 'UpdateFinancial'])->name('financial.update');
+        //Usability Connect
+        Route::get('/usability/connect', 'UsabilityConnect')->name('usability-connect');
+        Route::get('/usability-connect/create', 'UsabilityConnectCreate')->name('usability-connect.create');
+        
+        Route::post('/usability-connect/store', 'UsabilityConnectStore')->name('usability-connect.store');
+
+        // edit
+        Route::get('/usability-connect/{id}/edit', 'UsabilityConnectEdit')->name('usability-connect.edit');
+
+        //update
+        Route::put('/usability-connect/{id}', 'UsabilityConnectUpdate')->name('usability-connect.update');
+
+        // frontend update route
+        Route::post('/usability-connect/update-field', [HomeController::class, 'UpdateUsabilityConnect'])->name('usability-connect.update');
+
+        // delete
+        Route::delete('/usability-connect/{id}', 'UsabilityConnectDelete')->name('usability-connect.destroy');
+
+    });
+    
+   
 });
 
 
