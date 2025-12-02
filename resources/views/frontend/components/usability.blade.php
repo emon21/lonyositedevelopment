@@ -1,6 +1,7 @@
 @php
 
-$title = App\Models\SiteTitle::latest()->first();
+  $title = App\Models\SiteTitle::latest()->first();
+  $usability = App\Models\Usability::latest()->first();
 
 @endphp
 
@@ -9,8 +10,8 @@ $title = App\Models\SiteTitle::latest()->first();
       <div class="row">
         <div class="col-lg-5">
           <div class="lonyo-video-thumb">
-            <img src="{{ asset('frontend') }}/assets/images/v1/video-thumb.png" alt="">
-            <a class="play-btn video-init" href="https://www.youtube.com/watch?v=fgZc7mAYIY8">
+            <img src="{{ $usability->image ? asset('uploads/usability/' . $usability->image) : asset('uploads/no_image.jpg') }}" alt="">
+            <a class="play-btn video-init" href="{{ $title->youtube }}">
               <img src="{{ asset('frontend') }}/assets/images/v1/play-icon.svg" alt="">
               <div class="waves wave-1"></div>
               <div class="waves wave-2"></div>
@@ -21,10 +22,10 @@ $title = App\Models\SiteTitle::latest()->first();
         <div class="col-lg-7 d-flex align-items-center">
           <div class="lonyo-default-content lonyo-video-section pl-50" data-aos="fade-up" data-aos-duration="500">
             <h2 id="usability_title" class="p-4 rounded" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
-              data-id="{{ $title->id }}">{{ $title->usability }}</h2>
-            <p>It's a cloud-based accounting tool ideal for individuals & businesses to easily manage finances, invoices & payroll. Unlock the 3-step path to enhanced financial control. </p>
+              data-id="{{ $title->id }}">{{ $usability->title }}</h2>
+            <p>{{ $usability->description }}</p>
             <div class="mt-50" data-aos="fade-up" data-aos-duration="700">
-              <a class="lonyo-default-btn video-btn" href="contact-us.html">Download the app</a>
+              <a class="lonyo-default-btn video-btn" href="{{ $usability->link }}l">Download the app</a>
             </div>
           </div>
         </div>

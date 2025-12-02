@@ -87,8 +87,38 @@
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.clarifi.index') }}" class="tp-link">Get Clarifi</a>
-                                        </li>
-                                        
+                                        </li>  
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <li>
+                                <a href="#financial" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Financial Setup</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="financial">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.financial') }}" class="tp-link">Get Financial</a>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </li>
+
+
+                            <li>
+                                <a href="#usability" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Usability Setup</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="usability">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.get.usability') }}" class="tp-link">Get Usability</a>
+                                        </li>  
                                     </ul>
                                 </div>
                             </li>
@@ -106,8 +136,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.review.create') }}" class="tp-link">Review Create</a>
-                                        </li>
-                                        
+                                        </li>        
                                     </ul>
                                 </div>
                             </li>

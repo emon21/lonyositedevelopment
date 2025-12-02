@@ -163,10 +163,22 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
         Route::get('/clarifi', 'Getclarifis')->name('clarifi.index');
         Route::put('/clarifi/{id}', 'UpdateClarifi')->name('clarifi.update');
+
         
     });
+    //get.usability
 
+    Route::controller(HomeController::class)->group(function () {
+
+        Route::get('/usability', 'GetUsability')->name('get.usability');
+        Route::put('/usability/{id}', 'UpdateUsability')->name('usability.update');
+    });
+
+    Route::get('/financial', [HomeController::class, 'Financial'])->name('financial');
+    Route::post('/financial/update-field', [HomeController::class, 'UpdateFinancial'])->name('financial.update');
 });
+
+
 
 
 # =========== Admin Route List =========== #

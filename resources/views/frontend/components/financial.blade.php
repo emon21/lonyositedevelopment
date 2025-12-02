@@ -1,6 +1,7 @@
 @php
 
 $title = App\Models\SiteTitle::latest()->first();
+$financial = App\Models\Financial::with('tabs')->first();
 
 @endphp
 <div class="lonyo-section-padding4 position-relative">
@@ -13,26 +14,23 @@ $title = App\Models\SiteTitle::latest()->first();
         </div>
         <div class="col-lg-7 d-flex align-items-center">
           <div class="lonyo-default-content pr-50" data-aos="fade-right" data-aos-duration="700">
-            <h2 id="financial_title" class="p-4 rounded" contenteditable="{{ auth()->check() ? 'true' : 'false' }}" data-id="{{ $title->id }}">{{ $title->financial }}</h2>
-            <p class="data">This feature ensures you can easily stay on top of your finances by consolidating all updates into a single dashboard.</p>
+            <h2 id="financial_title" class="p-4 rounded" contenteditable="{{ auth()->check() ? 'true' : 'false' }}" data-id="{{ $title->id }}">{{ $financial->title }}</h2>
+            <p class="data">{{ $financial->description }}</p>
             <div class="mt-50">
               <ul class="tabs">
-                <li class="active-tab">
-                  <img src="{{ asset('frontend') }}/assets/images/v1/tv.svg" alt="">
-                  <h4>Unified Dashboard</h4>
-                </li>
-                <li>
-                  <img src="{{ asset('frontend') }}/assets/images/v1/alerm.svg" alt="">
-                  <h4>Real-Time Updates</h4>
-                </li>
+                @foreach($financial->tabs as $tab)
+                  <li class="{{ ($tab->order_number == 1) ? 'active-tab' : '' }}">
+                    <img src="{{ asset($tab->tab_icon) }}" alt="">
+                    <h4>{{ $tab->tab_title }}</h4>
+                  </li>
+                @endforeach
               </ul>
               <ul class="tabs-content">
+                 @foreach($financial->tabs as $tab)
                 <li>
-                  View all your accounts, transactions & investments in one central location. See every credit & debit transaction as it happens across all your accounts. Get a complete view of your expenses with expense categories.
+                  {{ $tab->tab_description }}
                 </li>
-                <li>
-                  This feature ensures you can easily stay on top of your finances by consolidating all updates into a single dashboard.View all your accounts, transactions iew of your expenses with expense categories.
-                </li>
+              @endforeach
               </ul>
             </div>
           </div>
