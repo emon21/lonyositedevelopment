@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\DesignController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\FeatureListController;
 use App\Http\Controllers\Admin\ReviewController;
@@ -246,11 +247,48 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
  
         });
 
+
+    # Our Team
+
+    Route::controller(TeamController::class)->group(function () {
+
+        // team
+         Route::get('/team', 'index')->name('team');
+
+         Route::get('/team/create', 'create')->name('team.create');
+         Route::post('/team/store', 'store')->name('team.store');
+
+         Route::get('/team/edit/{team}', 'edit')->name('team.edit');
+         //update
+         Route::put('/team/update/{team}', 'update')->name('team.update');
+         // delete
+         Route::delete('/team/delete/{team}', 'destroy')->name('team.destroy');
+
+
+    });
+
+
+
+
+
 });
 
-
+// out of any middleware
 
 
 # =========== Admin Route List =========== #
+
+
+# =========== Frontend Route List =========== #
+
+// Route::middleware(['auth'])->group(function () {
+
+// });
+
+
+Route::get('team', [FrontendController::class, 'Team'])->name('team');
+Route::get('single-team/{team}', [FrontendController::class, 'SingleTeam'])->name('single.team');
+
+# =========== Frontend Route List =========== #
 
 

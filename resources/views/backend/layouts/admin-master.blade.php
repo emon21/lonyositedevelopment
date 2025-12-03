@@ -221,6 +221,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- Custom js-->
     <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
+    <!-- validate js -->
+    <script src="{{ asset('backend') }}/assets/js/validate.min.js"></script>
 
 
     <script>

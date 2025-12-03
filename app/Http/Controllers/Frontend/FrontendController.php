@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Team;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class FrontendController extends Controller
 {
@@ -15,8 +16,14 @@ class FrontendController extends Controller
         return view('frontend/about');
     }
 
-    public function team(){
-        return view('frontend/team/index');
+    public function Team(){
+        $teams = Team::latest()->get();
+        return view('frontend/team/index',compact('teams'));
+
+    } 
+    public function SingleTeam(Team $team){
+        
+        return view('frontend/team/single-team',compact('team'));
 
     }
 

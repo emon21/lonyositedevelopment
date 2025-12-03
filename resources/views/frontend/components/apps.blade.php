@@ -1,6 +1,5 @@
 @php
 
-  $title = App\Models\SiteTitle::latest()->first();
   $app = App\Models\App::find(1);
 
 @endphp

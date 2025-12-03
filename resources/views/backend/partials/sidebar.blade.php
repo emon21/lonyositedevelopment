@@ -202,69 +202,30 @@
                             </li>
 
                             <li>
-                                <a href="#sidebarAuth" data-bs-toggle="collapse">
+                                <a href="#team" data-bs-toggle="collapse">
                                     <i data-feather="users"></i>
-                                    <span> Authentication </span>
+                                    <span> Our Team </span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <div class="collapse" id="sidebarAuth">
+                                <div class="collapse" id="team">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="auth-login.html" class="tp-link">Log In</a>
+                                            <a href="{{ route('admin.team') }}" class="tp-link">All Team</a>
                                         </li>
                                         <li>
-                                            <a href="auth-register.html" class="tp-link">Register</a>
+                                            <a href="{{ route('admin.team.create') }}" class="tp-link">Add Team</a>
                                         </li>
-                                        <li>
-                                            <a href="auth-recoverpw.html" class="tp-link">Recover Password</a>
-                                        </li>
-                                        <li>
-                                            <a href="auth-lock-screen.html" class="tp-link">Lock Screen</a>
-                                        </li>
-                                        <li>
-                                            <a href="auth-confirm-mail.html" class="tp-link">Confirm Mail</a>
-                                        </li>
-                                        <li>
-                                            <a href="email-verification.html" class="tp-link">Email Verification</a>
-                                        </li>
-                                        <li>
-                                            <a href="auth-logout.html" class="tp-link">Logout</a>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                             </li>
 
-                            <li>
-                                <a href="#sidebarError" data-bs-toggle="collapse">
-                                    <i data-feather="alert-octagon"></i>
-                                    <span> Error Pages </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="sidebarError">
-                                    <ul class="nav-second-level">
-                                        <li>
-                                            <a href="error-404.html" class="tp-link">Error 404</a>
-                                        </li>
-                                        <li>
-                                            <a href="error-500.html" class="tp-link">Error 500</a>
-                                        </li>
-                                        <li>
-                                            <a href="error-503.html" class="tp-link">Error 503</a>
-                                        </li>
-                                        <li>
-                                            <a href="error-429.html" class="tp-link">Error 429</a>
-                                        </li>
-                                        <li>
-                                            <a href="offline-page.html" class="tp-link">Offline Page</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+                           
 
                             <li>
                                 <a href="#sidebarExpages" data-bs-toggle="collapse">
                                     <i data-feather="file-text"></i>
-                                    <span> Utility </span>
+                                    <span> Web Site Settings </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarExpages">
