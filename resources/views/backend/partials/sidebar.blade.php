@@ -162,6 +162,26 @@
                                     </ul>
                                 </div>
                             </li>
+
+                            <li>
+                                <a href="#apps" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Apps Setup</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="apps">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.apps') }}" class="tp-link">
+                                                All Apps</a>
+                                        </li>
+                                           {{-- <li>
+                                            <a href="{{ route('admin.apps.create') }}" class="tp-link">
+                                                Add Apps</a>
+                                        </li>   --}}
+                                    </ul>
+                                </div>
+                            </li>
                             
                             <li>
                                 <a href="#review" data-bs-toggle="collapse">

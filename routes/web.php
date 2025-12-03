@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\DesignController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\FeatureListController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\ClarifiController;
@@ -217,12 +220,37 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
     });
 
+    # Apps Route
+    Route::controller(HomeController::class)->group(function () {
 
-    
-   
+        // apps
+        //  Route::get('/apps', 'apps')->name('apps');
+
+        //  Route::get('/apps/create', 'CreateApp')->name('apps.create');
+        //  Route::post('/apps/store', 'StoreApp')->name('apps.store');
+
+        //  Route::get('/apps/edit/{id}', 'EditApp')->name('apps.edit');
+        //  //update
+        //  Route::put('/apps/update/{id}', 'UpdateApp')->name('apps.update');
+        //  // delete
+        //  Route::delete('/apps/delete/{id}', 'DestroyApp')->name('apps.destroy');
+
+         // get
+        Route::get('/apps', 'AllApp')->name('apps');
+
+         Route::post('/apps/update-apps', 'UpdateApps')->name('apps.update-apps');
+
+        //  Route::post('/apps/update-apps-image/{id}', 'UpdateAppsImage')->name('apps.update.image');
+         Route::post('/apps/update-apps-image/{id}', 'updateImage')->name('apps.update-image');
+
+ 
+        });
+
 });
 
 
 
 
 # =========== Admin Route List =========== #
+
+

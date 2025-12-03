@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\App;
 use App\Models\Answer;
 use App\Models\Clarifi;
 use App\Models\Financial;
@@ -221,5 +222,86 @@ class HomeController extends Controller
     }
 
     # ================ Answer End ================
+
+
+    # ================ App  ================
+
+    //AllApp
+    public function AllApp(){
+
+        $apps = App::latest()->get();
+        return view('backend.apps.all_apps',compact('apps'));
+    }
+
+    // UpdateApps
+    public function UpdateApps(Request $request){
+
+        $app = App::find($request->id);
+        $app->{$request->field} = $request->value;
+        $app->save();
+
+        return response()->json(['message' => 'Updated Apps Info Successfully']);
+
+        // $app->title = $request->title;
+        // $app->description = $request->description;
+        // $app->link = $request->link;
+        // $app->save();
+
+        // # notification helper function
+        // $notification = ToasterNotification::Toaster('App Updated Successfully....', 'info', 'Updated App');
+        // return redirect()->route('admin.apps')->with($notification);
+
+
+
+
+    }
+
+    // UpdateAppsImage
+    // public function UpdateAppsImage(Request $request, $id){
+
+    //     $app = App::find($id);
+
+    //     # Image Upload using By Helper Function
+    //     if ($request->hasFile('FileUpload')) {
+
+    //         // old image delete
+    //         FileUpload::deleteImage('uploads/apps/' . $app->image);
+    //         // update image
+    //         $app->image = FileUpload::uploadImage($request->file('FileUpload'), 'apps');
+    //     }
+
+    //     $app->save();
+
+    //     # notification helper function
+    //     $notification = ToasterNotification::Toaster('App Image Updated Successfully....', 'info', 'Updated App Image');
+    //     return redirect()->route('admin.apps')->with($notification);
+
+    // }
+
+
+    public function updateImage(Request $request, $id)
+{
+    $app = App::findOrFail($id);
+
+    if ($request->hasFile('photo')) {
+        $image = $request->file('photo');
+        $name = time().'.'.$image->getClientOriginalExtension();
+        $image->move(public_path('uploads/apps'), $name);
+
+        // delete old file
+        if ($app->photo && file_exists(public_path('uploads/apps/'.$app->photo))) {
+            unlink(public_path('uploads/apps/'.$app->photo));
+        }
+
+        $app->photo = $name;
+        $app->save();
+    }
+
+     return response()->json(['message' => 'Image updated successfully']);
+}
+
+
+
+    # ================ App End ================
 
 }
