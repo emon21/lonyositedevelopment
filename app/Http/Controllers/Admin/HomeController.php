@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\Answer;
 use App\Models\Clarifi;
 use App\Models\Financial;
 use App\Models\Usability;
@@ -159,4 +160,66 @@ class HomeController extends Controller
 
         return response()->json(['message' => 'Updated Usability Connect successfully']);
     }
+
+    # ================ Answer ================ #
+
+    // index
+    public function answer(){
+        $answers = Answer::latest()->get();
+        return view('backend/answer/index',compact('answers'));
+    }
+
+    // CreateAnswer
+     public function CreateAnswer(){
+        return view('backend/answer/create');
+    }
+
+    // StoreAnswer
+    public function StoreAnswer(Request $request)
+    {
+        $answer = new Answer();
+        $answer->title = $request->title;
+        $answer->description = $request->description;
+        $answer->save();
+
+        # notification helper function
+        $notification = ToasterNotification::Toaster('Answer Created Successfully....', 'success', 'Created Answer');
+        return redirect()->route('admin.answer')->with($notification);
+    }
+
+    // EditAnswer
+    public function EditAnswer($id)
+    {
+        $answer = Answer::find($id);
+        return view('backend/answer/edit', compact('answer'));
+    }
+
+    // UpdateAnswer
+    public function UpdateAnswer(Request $request, $id){
+
+        $answer = Answer::find($id);
+        $answer->title = $request->title;
+        $answer->description = $request->description;
+        $answer->save();
+
+        # notification helper function
+        $notification = ToasterNotification::Toaster('Answer Updated Successfully....', 'info', 'Updated Answer');
+        return redirect()->route('admin.answer')->with($notification);
+
+    }
+
+    // DestroyAnswer
+    public function DestroyAnswer($id)
+    {
+        $answer = Answer::find($id);
+        $answer->delete();
+
+        # notification helper function
+        $notification = ToasterNotification::Toaster('Answer Deleted Successfully....', 'error', 'Deleted Answer');
+        return redirect()->route('admin.answer')->with($notification);
+
+    }
+
+    # ================ Answer End ================
+
 }

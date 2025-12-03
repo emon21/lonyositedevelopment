@@ -142,6 +142,26 @@
                                     </ul>
                                 </div>
                             </li>
+
+                            <li>
+                                <a href="#answer" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Answer Setup</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="answer">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.answer') }}" class="tp-link">
+                                                All Answer</a>
+                                        </li>
+                                           <li>
+                                            <a href="{{ route('admin.answer.create') }}" class="tp-link">
+                                                Add Answer</a>
+                                        </li>  
+                                    </ul>
+                                </div>
+                            </li>
                             
                             <li>
                                 <a href="#review" data-bs-toggle="collapse">

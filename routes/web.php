@@ -197,6 +197,27 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::delete('/usability-connect/{id}', 'UsabilityConnectDelete')->name('usability-connect.destroy');
 
     });
+
+
+    # Answer
+    Route::controller(HomeController::class)->group(function () {
+
+        // answer
+         Route::get('/answer', 'answer')->name('answer');
+
+         Route::get('/answer/create', 'CreateAnswer')->name('answer.create');
+         Route::post('/answer/store', 'StoreAnswer')->name('answer.store');
+
+         Route::get('/answer/edit/{id}', 'EditAnswer')->name('answer.edit');
+         //update
+         Route::put('/answer/update/{id}', 'UpdateAnswer')->name('answer.update');
+         // delete
+         Route::delete('/answer/delete/{id}', 'DestroyAnswer')->name('answer.destroy');
+
+
+    });
+
+
     
    
 });
