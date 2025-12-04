@@ -33,6 +33,12 @@
     <link href="{{ asset('backend') }}/assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css"
         rel="stylesheet" type="text/css" />
 
+        <!-- Quill css -->
+        <link href="{{ asset('backend') }}/assets/libs/quill/quill.core.js" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('backend') }}/assets/libs/quill/quill.snow.css" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('backend') }}/assets/libs/quill/quill.bubble.css" rel="stylesheet" type="text/css" />
+         <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+
 </head>
 
 <!-- body start -->
@@ -81,10 +87,12 @@
 
     </div>
     <!-- END wrapper -->
-
+       
     <!-- Vendor -->
     <script src="{{ asset('backend') }}/assets/libs/jquery/jquery.min.js"></script>
+    
     <script src="{{ asset('backend') }}/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
     <script src="{{ asset('backend') }}/assets/libs/simplebar/simplebar.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/node-waves/waves.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
@@ -224,6 +232,13 @@
     <!-- validate js -->
     <script src="{{ asset('backend') }}/assets/js/validate.min.js"></script>
 
+    <!-- Quill Editor Js -->
+        <script src="{{ asset('backend') }}/assets/libs/quill/quill.core.js"></script>
+        <script src="{{ asset('backend') }}/assets/libs/quill/quill.min.js"></script>
+        <!-- Quill Demo Js -->
+        <script src="{{ asset('backend') }}/assets/js/pages/quilljs.init.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
 
     <script>
         // $(function () {

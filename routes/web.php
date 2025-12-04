@@ -268,6 +268,22 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     });
 
 
+    # About Get Route
+
+    // Route::get('/about', [AboutController::class, 'index'])->name('get.about');
+
+
+    // Route::get('/about', [AboutController::class, 'index'])->name('about');
+    // Route::get('/about/edit/{about}', [AboutController::class, 'edit'])->name('about.edit');
+    // Route::put('/about/update/{about}', [AboutController::class, 'update'])->name('about.update');
+
+    Route::controller(FrontendController::class)->group(function () {
+
+        Route::get('/get/about',  'GetAboutUs')->name('get.about');
+        Route::put('/about/update/{about}',  'UpdateAbout')->name('about.update');
+
+    });
+
 
 
 

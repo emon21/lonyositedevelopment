@@ -8,9 +8,9 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6">
-        <div class="lonyo-cta-thumb" data-aos="fade-up" data-aos-duration="500">
+        <div class="lonyo-cta-thumb aos-init aos-animate" data-aos="fade-up" data-aos-duration="500">
           <img id="appImage" src="{{ asset('uploads/apps/' . $app->photo) }}" alt=""
-            style="width:100%;height:100%;object-fit:cover; cursor:pointer">
+            >
 
           {{-- Image upload functionality --}}
           @if(auth()->check())
@@ -25,16 +25,11 @@
           <p id="description" class="p-4 rounded" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
             data-id="{{ $app->id }}">{{ $app->description }}</p> --}}
 
-          <div class="lonyo-process-title">
-            <h4 id="title" class="editable" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
-              data-id="{{ $app->id }}" data-field="title">{{ $app->title }}</h4>
-          </div>
-
-          <div class="lonyo-process-data">
-            <p id="description" class="editable" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
+            <h2 id="title" class="editable" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
+              data-id="{{ $app->id }}" data-field="title">{{ $app->title }}</h2>
+              <p id="description" class="pt-1 editable" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
               data-id="{{ $app->id }}" data-field="description">{{ $app->description }}</p>
-          </div>
-
+       
           <div class="lonyo-cta-info mt-50" data-aos="fade-up" data-aos-duration="900">
             <ul>
               <li>
@@ -55,12 +50,6 @@
 
 @push('frontend-js')
   <script>
-
-    
-
-    
-
-
 
     /* =======================================================
            * 2️⃣ UPDATE IMAGE UPLOAD

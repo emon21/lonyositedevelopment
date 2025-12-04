@@ -219,6 +219,22 @@
                                     </ul>
                                 </div>
                             </li>
+                            <li>
+                                <a href="#about" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> About </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="about">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.get.about') }}" class="tp-link">About Page</a>
+                                        </li>
+                                       
+                                        
+                                    </ul>
+                                </div>
+                            </li>
 
                            
 
