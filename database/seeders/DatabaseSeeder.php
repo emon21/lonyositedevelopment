@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             FeatureSeeder::class,
             FinancialSeeder::class,
             AnswerSeeder::class,
+            CategorySeeder::class,
         ]);
     }
 }

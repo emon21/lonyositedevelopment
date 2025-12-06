@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\DesignController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\AdminController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\ClarifiController;
 use App\Http\Controllers\admin\FeatureController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\admin\BlogCategoryController;
 
 Route::get('/', function () {
 
@@ -285,6 +287,20 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     });
 
 
+    # Category Route
+
+    Route::controller(BlogCategoryController::class)->group(function () {
+
+        // category route list
+        Route::get('/category', 'index')->name('category');
+        Route::get('/category/create', 'create')->name('category.create');
+        Route::post('/category/store', 'store')->name('category.store');
+        Route::get('/category/edit/{id}', 'edit')->name('category.edit');
+        Route::put('/category/update/{id}', 'update')->name('category.update');
+        Route::delete('/category/delete/{id}', 'destroy')->name('category.destroy');
+        Route::get('/category/show/{category}', 'show')->name('category.show');
+
+    }); 
 
 
 });
