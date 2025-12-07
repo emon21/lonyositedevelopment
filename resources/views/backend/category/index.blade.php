@@ -49,7 +49,7 @@
                      @forelse($categories as $category)
                         <tr>
                            <td>{{ $loop->index + 1 }}</td>
-                           <td>{{ $category->category_name }}</td>
+                           <td>{{ $category->category_name }} ( {{ $category->blog()->count() ?? 0 }} )</td>
                            <td>{{ $category->category_slug }}</td>
                            <td>
                               {{-- <a href="{{ route('admin.category.edit', $category) }}" class="btn btn-success">Edit</a>

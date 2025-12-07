@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             FinancialSeeder::class,
             AnswerSeeder::class,
             CategorySeeder::class,
+            BlogSeeder::class,
         ]);
     }
 }

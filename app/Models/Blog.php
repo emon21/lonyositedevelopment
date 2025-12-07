@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BlogCategory extends Model
+class Blog extends Model
 {
     protected $guarded = [];
 
-    # Relationship
-    public function blog()
-    {
-        return $this->hasMany(Blog::class, 'category_id');
-    }
 
+    # Relationship
+
+    public function category()
+    {
+        return $this->belongsTo(BlogCategory::class, 'category_id');
+    }
 }

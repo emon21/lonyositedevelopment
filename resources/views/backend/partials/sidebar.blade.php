@@ -254,6 +254,21 @@
                             </li>
 
                             <li>
+                                <a href="#blog" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span>Blog Page</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="blog">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.blog') }}" class="tp-link">All Blog</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
                                 <a href="#sidebarExpages" data-bs-toggle="collapse">
                                     <i data-feather="file-text"></i>
                                     <span> Web Site Settings </span>

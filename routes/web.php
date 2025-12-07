@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\DesignController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\AdminController;
@@ -49,6 +50,8 @@ Route::get('service', [FrontendController::class, 'service'])->name('service');
 Route::get('portfolio', [FrontendController::class, 'portfolio'])->name('portfolio');
 // blog route
 Route::get('blog', [FrontendController::class, 'blog'])->name('blog');
+//single blog
+Route::get('blog/single-blog/{blog:slug}', [FrontendController::class, 'SingleBlog'])->name('single-blog');
 //career
 Route::get('career', [FrontendController::class, 'career'])->name('career');
 // contact
@@ -300,8 +303,24 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::delete('/category/delete/{id}', 'destroy')->name('category.destroy');
         Route::get('/category/show/{category}', 'show')->name('category.show');
 
-    }); 
+    });
 
+        # BLog Route
+    Route::controller(BlogController::class)->group(function () {
+            
+            // blog route list
+            Route::get('/blog', 'index')->name('blog');
+            Route::get('/blog/create', 'create')->name('blog.create');
+            Route::post('/blog/store', 'store')->name('blog.store');
+            Route::get('/blog/edit/{blog}', 'edit')->name('blog.edit');
+            Route::put('/blog/update/{blog}', 'update')->name('blog.update');
+            Route::delete('/blog/delete/{blog}', 'destroy')->name('blog.destroy');
+
+            Route::get('/blog/show/{blog}', 'show')->name('blog.show');
+
+    });
+
+    
 
 });
 
@@ -318,9 +337,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 // });
 
 
+
 Route::get('team', [FrontendController::class, 'Team'])->name('team');
 Route::get('single-team/{team}', [FrontendController::class, 'SingleTeam'])->name('single.team');
 
+
 # =========== Frontend Route List =========== #
-
-
