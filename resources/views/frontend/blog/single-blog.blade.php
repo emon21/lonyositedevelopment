@@ -16,12 +16,15 @@
                         </div>
                         <div class="pb-0 lonyo-blog-meta">
                             <ul>
-                                <li><img src="{{ asset('frontend') }}/assets/images/blog/date.svg"
-                                        alt="">{{ Carbon\Carbon::parse($blog->created_at)->format('F d, Y') }}
+                                <li>
+                                    <a href="#">
+                                        <img src="{{ asset('frontend') }}/assets/images/blog/date.svg"
+                                            alt="">{{ Carbon\Carbon::parse($blog->created_at)->format('F d, Y') }}</a>
                                 </li>
                                 <li>
-                                    <a href="single-blog.html"><img
-                                            src="{{ asset('frontend') }}/assets/images/blog/clock.svg" alt="">5 min read</a>
+                                    <a href="#">
+                                        <img src="{{ asset('frontend') }}/assets/images/blog/clock.svg" alt="">5 min
+                                        read</a>
                                 </li>
                             </ul>
                         </div>
@@ -176,26 +179,12 @@
             </div>
 
             {{-- @php
-            $category = $relatedBlogs[0]; // প্রথম category
-            $blogs = $category['blog'];
-            $firstBlog = $blogs[0] ?? null;
-            $relatedBlogs = array_slice($blogs, 1); // প্রথম বাদ বাকি সব
+                $category = App\models\BlogCategory::with('blog')
+                    ->where('id', $blog->category_id)
+                    ->first(); // প্রথম category
+                $blogs = $category->blog->toArray();
+                $relatedPosts = array_slice($blogs, 1); // প্রথম বাদ বাকি সব
             @endphp --}}
-
-            @if(count($relatedBlogs))
-    @foreach($relatedBlogs as $blog)
-        <div class="mb-3 card">
-            <img src="{{ asset('uploads/' . $blog['photo']) }}" class="card-img-top" alt="{{ $blog['title'] }}">
-            <div class="card-body">
-                <h5>{{ $blog['title'] }}</h5>
-                <p>{{ Str::limit($blog['description'], 100) }}</p>
-                <a href="{{ url('/blog/' . $blog['slug']) }}" class="btn btn-sm btn-primary">Read More</a>
-            </div>
-        </div>
-    @endforeach
-@else
-    <p>No related blogs found.</p>
-@endif
 
             <!-- Related Blogs -->
             <div class="row">
@@ -203,18 +192,20 @@
                     <div class="col-lg-6">
                         <div class="lonyo-blog-wrap" data-aos="fade-up" data-aos-duration="700">
                             <div class="lonyo-blog-thumb">
-                                {{-- <img src="{{ $blog->photo ? asset('uploads/blog/' . $blog->photo) : asset('uploads/no_image.jpg') }}"
-                                    alt="Blog Image" style="width: 576px; height: 350px;"> --}}
+                                <img src="{{ $blog['photo'] ? asset('uploads/blog/' . $blog['photo']) : asset('uploads/no_image.jpg') }}"
+                                    alt="Blog Image" style="width: 576px; height: 350px;">
                             </div>
                             <div class="lonyo-blog-meta">
                                 <ul>
                                     <li>
-                                        <a href="blog.html"><img src="{{ asset('frontend') }}/assets/images/blog/date.svg"
-                                                alt="">June 10, 2025</a>
+                                        <a href="#">
+                                            <img src="{{ asset('frontend') }}/assets/images/blog/date.svg"
+                                                alt="">{{ Carbon\Carbon::parse($blog['created_at'])->format('F d, Y') }}</a>
                                     </li>
                                     <li>
-                                        <a href="blog.html"><img src="{{ asset('frontend') }}/assets/images/blog/clock.svg"
-                                                alt="">7 min read</a>
+                                        <a href="#">
+                                            <img src="{{ asset('frontend') }}/assets/images/blog/clock.svg" alt="">7 min
+                                            read</a>
                                     </li>
                                 </ul>
                             </div>
@@ -222,10 +213,11 @@
                                 <a href="blog.html">
                                     <h2>{{ $blog['title'] }}</h2>
                                 </a>
-                                {{-- <p>{{ $blog->description }}</p> --}}
+                                <p>{{ Str::limit($blog['description'], 100) }}</p>
                             </div>
                             <div class="lonyo-blog-btn">
-                                <a href="blog.html" class="lonyo-default-btn blog-btn">Continue Reading</a>
+                                <a href="{{ url('/blog/single-blog/' . $blog['slug']) }}"
+                                    class="lonyo-default-btn blog-btn">Continue Reading</a>
                             </div>
                         </div>
                     </div>

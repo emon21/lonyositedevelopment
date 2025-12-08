@@ -47,11 +47,22 @@ Route::get('team', [FrontendController::class, 'team'])->name('team');
 //service
 Route::get('service', [FrontendController::class, 'service'])->name('service');
 //portfolio
+
 Route::get('portfolio', [FrontendController::class, 'portfolio'])->name('portfolio');
-// blog route
+
+// All Category route       
+Route::get('category', [FrontendController::class, 'category'])->name('category');
+
+//Single category of blog
+Route::get('/category/{category:category_slug}', [FrontendController::class, 'CategoryPosts'])
+    ->name('category.posts');
+
+// blog route       
 Route::get('blog', [FrontendController::class, 'blog'])->name('blog');
 //single blog
+
 Route::get('blog/single-blog/{blog:slug}', [FrontendController::class, 'SingleBlog'])->name('single-blog');
+
 //career
 Route::get('career', [FrontendController::class, 'career'])->name('career');
 // contact
@@ -319,9 +330,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
             Route::get('/blog/show/{blog}', 'show')->name('blog.show');
 
     });
-
-    
-
+   
 });
 
 // out of any middleware

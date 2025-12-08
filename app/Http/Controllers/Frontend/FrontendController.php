@@ -73,6 +73,33 @@ class FrontendController extends Controller
     public function portfolio()
     {
         return view('frontend/portfolio/index');
+    } 
+    
+    public function category()
+    {
+        # category with blog;
+
+        $category = BlogCategory::withCount('blog')->get();
+     
+        return view('frontend/category/index',compact('category'));
+    }
+
+
+    public function CategoryPosts(BlogCategory $category)
+    {
+        $category = BlogCategory::where('category_slug', $category->category_slug)->first();
+        // return $category;
+
+        // পোস্ট + count load
+        $category->loadCount('blog');
+
+        $posts = Blog::where('category_id', $category->id)
+            ->latest()
+            ->get();
+
+        //blog_count
+
+        return view('frontend/category/category', compact('category', 'posts'));
     }
 
     public function blog()
@@ -88,18 +115,33 @@ class FrontendController extends Controller
        // 1. Category load with blogs
 
         # Category with blog
-        $category = BlogCategory::with('blog')
-                    ->where('id', $blog->category_id)
-                    ->first(); // get() নয়, first() লাগে, কারণ একটাই category
+        //$category = BlogCategory::with('blog')
+                  //  ->where('id', $blog->category_id)
+                   // ->inRandomOrder()
+                  //  ->first(); // get() নয়, first() লাগে, কারণ একটাই category
+
+                    // একই category এর অন্যান্য ব্লগ (related blog)
+    $relatedBlogs = Blog::where('category_id', $blog->category_id)
+                        ->where('id', '!=', $blog->id)
+                        ->inRandomOrder()
+                       // ->take(5) // কতগুলো related blog দেখাতে চান
+                        ->get();
+                        // return $relatedBlogs;
+        
+        // $blogs = $category['blog'];
 
         // 2. Split blogs: first blog & related
-        $blogs = $category->blog->toArray(); // collection to array of single category all blog
-        $relatedBlogs = array_slice($blogs, 1); // প্রথম blog বাদ বাকি সব
+       // $blogs = $category->blog->toArray(); // collection to array of single category all blog
+        //$firstBlog = $blogs[0] ?? null; // 
+       // $relatedBlogs = array_slice($blogs, 1); // প্রথম blog বাদ বাকি সব
+
+        # random blog
+
 
         // return $relatedBlogs;
 
         // 3. Pass to view
-        return view('frontend/blog/single-blog', compact('category','blog', 'relatedBlogs'));
+        return view('frontend/blog/single-blog', compact('blog', 'relatedBlogs'));
 
      //   $firstBlog = $blogs[0] ?? null;
        

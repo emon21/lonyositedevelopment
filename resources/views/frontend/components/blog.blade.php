@@ -13,29 +13,29 @@
               <h4>Categories:</h4>
               <div class="lonyo-blog-categorie">
                @php
-                  $categories = App\Models\BlogCategory::withCount('blog')->get();
+                $categories = App\Models\BlogCategory::withCount('blog')->get();
                @endphp
                 <ul>
                    @foreach ($categories as $category)
-                     <li><a href="{{ route('single-blog',$blog) }}">{{ $category->category_name }} <span>( {{ $category->blog_count }} )</span></a></li>
+                     <li><a href="{{ route('category.posts', $category) }}">{{ $category->category_name }} <span>( {{ $category->blog_count }} )</span></a></li>
                   @endforeach
                 </ul>
               </div>
             </div>
             <div class="lonyo-blog-widgets">
                @php
-$blogs = App\Models\Blog::latest()->get();
+                $blogs = App\Models\Blog::latest()->limit(4)->get();
                @endphp
               <h4>Recent Posts</h4>
               @foreach ($blogs as $blog)
-                 <a class="lonyo-blog-recent-post-item" href="{{ route('single-blog',$blog) }}">
+                 <a class="lonyo-blog-recent-post-item" href="{{ route('single-blog', $blog) }}">
                    <div class="lonyo-blog-recent-post-thumb">
                      <img src="{{ $blog->photo ? asset('uploads/blog/' . $blog->photo) : asset('uploads/no_image.jpg') }}" alt="Review Image"
                         style="width: 150px; height: 120px;">
                    </div>
                    <div class="lonyo-blog-recent-post-data">
                      <ul>
-                       <li><img src="{{ asset('frontend') }}/assets/images/blog/date.svg" alt="">June 15, 2025</li>
+                       <li><img src="{{ asset('frontend') }}/assets/images/blog/date.svg" alt="">{{ Carbon\Carbon::parse($blog->created_at)->format('F d, Y') }}</li>
                      </ul>
                      <div>
                        <h4>{{ $blog->title }}</h4>
