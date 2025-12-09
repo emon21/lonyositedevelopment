@@ -268,6 +268,21 @@
                                 </div>
                             </li>
 
+                             <li>
+                                <a href="#contacts" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span>Contact Page</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="contacts">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('contact.all.message') }}" class="tp-link">All Contacts</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
                             <li>
                                 <a href="#sidebarExpages" data-bs-toggle="collapse">
                                     <i data-feather="file-text"></i>

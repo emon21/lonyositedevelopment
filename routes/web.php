@@ -65,8 +65,16 @@ Route::get('blog/single-blog/{blog:slug}', [FrontendController::class, 'SingleBl
 
 //career
 Route::get('career', [FrontendController::class, 'career'])->name('career');
+
 // contact
 Route::get('contact-us', [FrontendController::class, 'contact'])->name('contact');
+
+// contact store
+Route::post('contact-us/message', [FrontendController::class, 'ContactMessage'])->name('contact.message');
+
+// all Contact List
+Route::get('contact/all/message', [FrontendController::class, 'ContactAllMessage'])->name('contact.all.message');
+Route::post('message/read/{id}', [FrontendController::class, 'markAsRead']);
 
 
 // Dashboard
@@ -80,7 +88,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
 
 require __DIR__ . '/auth.php';
 

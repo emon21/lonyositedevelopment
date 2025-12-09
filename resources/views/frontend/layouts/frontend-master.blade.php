@@ -132,13 +132,28 @@
  
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
-  // @if(Session::has('message'))
-  //   toastr["{{ Session::get('alert-type') }}"](
-  //   "{{ Session::get('message') }}",
-  //   );
-  // @endif
+//   @if(Session::has('message'))
+//     toastr["{{ Session::get('alert-type') }}"](
+//     "{{ Session::get('message') }}",
+//     );
+//   @endif
+
+//   Swal.fire({
+//       title: "Good job!",
+//       text: "You clicked the button!",
+//       icon: "success"
+//     });
+
+//     Swal.fire({
+//   title: "Drag me!",
+//   icon: "success",
+//   draggable: true
+// });
+
+
 </script>
 
 
