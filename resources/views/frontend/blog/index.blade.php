@@ -19,16 +19,19 @@
               <div class="lonyo-blog-meta">
                 <ul>
                   <li>
-                    <a href="single-blog.html"><img src="{{ asset('frontend') }}/assets/images/blog/date.svg" alt="">{{ Carbon\Carbon::parse($blog->created_at)->format('F d, Y') }}</a>
+                    <a href="#"><img src="{{ asset('frontend') }}/assets/images/blog/date.svg" alt="">{{ Carbon\Carbon::parse($blog->created_at)->format('F d, Y') }}</a>
 
                   </li>
                   <li>
-                    <a href="single-blog.html"><img src="{{ asset('frontend') }}/assets/images/blog/clock.svg" alt="">5 min read</a>
+                    <a href="#"><img src="{{ asset('frontend') }}/assets/images/blog/clock.svg" alt="">5 min read</a>
+                  </li>
+                  <li>
+                    <a href="#"><img src="{{ asset('frontend') }}/assets/images/blog/clock.svg" alt="">Comments ( {{ $blog->comments->count() }} )</a>
                   </li>
                 </ul>
               </div>
               <div class="lonyo-blog-content">
-                <h2><a href="single-blog.html">{{ $blog->title }}</a></h2>
+                <h2><a href="{{ route('single-blog',$blog) }}">{{ $blog->title }}</a></h2>
                 <p>{!! $blog->description !!}</p>
               </div>
               <div class="lonyo-blog-btn">

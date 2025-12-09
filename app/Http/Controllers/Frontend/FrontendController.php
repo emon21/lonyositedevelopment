@@ -6,12 +6,14 @@ use App\Models\Blog;
 use App\Models\Team;
 use App\Models\About;
 use App\Models\Review;
+use App\Models\Comment;
 use App\Models\Contact;
 use App\Helpers\FileUpload;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use App\Helpers\ToasterNotification;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -106,7 +108,9 @@ class FrontendController extends Controller
 
     public function blog()
     {
-        $blogs = Blog::latest()->get();
+        $blogs = Blog::with('comments')->latest()->get();
+        // return $blogs;
+
         return view('frontend/blog/index', compact('blogs'));
     }
     public function SingleBlog(Blog $blog)
@@ -150,6 +154,53 @@ class FrontendController extends Controller
         // 3. Pass to view
         // return view('frontend/blog/single-blog', compact('category', 'firstBlog', 'relatedBlogs', 'blog'));
     }
+
+
+    public function CommentStore(Request $request)
+    {
+        $auth = Auth::check();
+
+
+        Comment::create([
+            'blog_id' => $request->blog_id,
+            'user_id' => Auth::id(),
+            'parent_id' => $request->parent_id,
+            'comment' => $request->comment
+        ]);
+
+
+        return back()->with('success', 'Comment added successfully!');
+    }
+
+    // Admin Reply
+    public function CommentReply(Request $request)
+    {
+
+        $request->validate([
+            'comment_id' => 'required|exists:comments,id',
+            'reply'      => 'required|string'
+        ]);
+
+        $parent = Comment::findOrFail($request->comment_id);
+
+        Comment::create([
+            'blog_id'   => $parent->blog_id,
+            'user_id'   => Auth::id(), // admin user
+            'parent_id' => $parent->id,
+            'comment'   => $request->reply,
+        ]);
+
+        return back()->with('message', 'Admin replied successfully!');
+    }
+
+    public function CommentRemove(Request $request, $comment){
+
+        $comment = Comment::find($comment);
+        $comment->delete();
+        return back();
+    }
+
+
 
     public function career()
     {

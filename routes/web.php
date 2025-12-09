@@ -63,6 +63,12 @@ Route::get('blog', [FrontendController::class, 'blog'])->name('blog');
 
 Route::get('blog/single-blog/{blog:slug}', [FrontendController::class, 'SingleBlog'])->name('single-blog');
 
+// Blog with comment
+Route::post('/comment/store', [FrontendController::class, 'CommentStore'])->name('comment.store');
+Route::post('/comment/reply', [FrontendController::class, 'CommentReply'])->middleware(['auth'])->name('comment.reply');
+
+Route::get('comment-reply-remove/{comment}', [FrontendController::class, 'CommentRemove'])->name('comment-reply-remove');
+
 //career
 Route::get('career', [FrontendController::class, 'career'])->name('career');
 

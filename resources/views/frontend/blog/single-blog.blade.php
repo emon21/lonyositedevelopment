@@ -5,7 +5,7 @@
     <x-breadcrumb title="Single Blog" current="Blog" />
 
     <!-- End breadcrumb -->
-    <div class="overflow-hidden lonyo-section-padding7">
+    <div class="overflow-hidden lonyo-section-padding9">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -30,12 +30,18 @@
                         </div>
 
                         <div class="lonyo-blog-d-content">
-                            <h2>{{ strtoupper($blog->title) }}:</h2>
+                            <h4 class="py-2">{{ strtoupper($blog->title) }}:</h4>
                             <p>{!! $blog->description !!}</p>
                         </div>
-
+                        <div class="my-2 lonyo-blog-widgets widgets2">
+                            <h4>Categories :</h4>
+                            <div class="lonyo-blog">
+                                <p>{{ $blog->category->category_name }}</p>
+                            </div>
+                        </div>
 
                         <div class="lonyo-blog-d-content-wrap">
+
                             <div class="lonyo-blog-widgets widgets2">
                                 <h4>Tags</h4>
                                 <div class="lonyo-blog-tags">
@@ -99,91 +105,158 @@
                         </div>
 
                         <div class="lonyo-blog-d-comment-box">
-                            <h4>Comments:</h4>
-                            <div class="lonyo-blog-d-comment-wrap1">
-                                <div class="lonyo-blog-d-comment-thumb">
-                                    <img src="{{ asset('frontend') }}/assets/images/blog/b8.png" alt="">
+                            <h4>Comments ({{ $blog->comments->count() }})</h4>
+                            {{-- Comment List --}}
+                            @foreach($blog->comments->whereNull('parent_id') as $comment)
+                                <div class="my-3 lonyo-blog-d-comment-wrap d-flex justify-content-between">
+                                    <div class="lonyo-blog-d-comment-wrap1">
+                                        <div class="lonyo-blog-d-comment-thumb">
+                                            <img src="{{ asset('frontend') }}/assets/images/blog/b8.png" alt="">
+                                        </div>
+                                        <div class="lonyo-blog-d-comment-data1">
+                                            <h5>{{ $comment->user->name ?? 'Guest' }}</h5>
+                                            <span>{{ Carbon\Carbon::parse($comment->created_at)->format('F d, Y') }}</span>
+                                            <p>{{ $comment->comment }}</p>
+                                        </div>
+                                    </div>
+                                    <!-- Reply Button -->
+                                    <div class="reply-btn">
+                                        <button onclick="toggleReplyForm({{ $comment->id }})" class="reply-btn">
+                                            Reply
+                                        </button>
+                                        <a href="{{ route('comment-reply-remove', $comment->id) }}"
+                                            class="w-full px-1 py-1 my-2 text-sm text-left text-white bg-danger">
+                                            X
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="lonyo-blog-d-comment-data1">
-                                    <h5>Vicky Smith</h5>
-                                    <span>June 21, 2025</span>
-                                    <p>After reading the blog, I understand personal finance is exigent. Personal finance
-                                        isn't just a way to track your spending.</p>
+                                <!-- Reply form (hidden by default) -->
+
+                                <div class="my-2 pl-101">
+                                    <form action="{{ route('comment.store') }}" method="POST" id="reply-form-{{ $comment->id }}"
+                                        class="mt-2" style="display:none;">
+                                        @csrf
+                                        <input type="hidden" name="blog_id" value="{{ $blog->id }}">
+                                        <input type="hidden" name="parent_id" value="{{ $comment->id }}">
+
+                                        <textarea name="comment" class="mb-2 form-control"
+                                            placeholder="Write reply..."></textarea>
+                                        <button type="submit" class="btn btn-sm btn-success">Reply</button>
+                                    </form>
                                 </div>
-                                <div class="reply-btn">
-                                    <a href="single-blog.html">Reply</a>
-                                </div>
-                            </div>
-                            <div class="lonyo-blog-d-comment-wrap pl-101">
-                                <div class="lonyo-blog-d-comment-thumb">
-                                    <img src="{{ asset('frontend') }}/assets/images/blog/b9.png" alt="">
-                                </div>
-                                <div class="lonyo-blog-d-comment-data">
-                                    <h5>Adam Mac</h5>
-                                    <span>September 22, 2025</span>
-                                    <p>It's a tool to secure financial future, helping consumers track spending, pay bills,
-                                        budgets and create savings.</p>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="single-blog.html">Reply</a>
-                                </div>
-                            </div>
-                            <div class="lonyo-blog-d-comment-wrap1 wrap2">
-                                <div class="lonyo-blog-d-comment-thumb">
-                                    <img src="{{ asset('frontend') }}/assets/images/blog/b10.png" alt="">
-                                </div>
-                                <div class="lonyo-blog-d-comment-data1">
-                                    <h5>William Thomas</h5>
-                                    <span>June 21, 2025</span>
-                                    <p>Yes exactly! Personal finance software gives a clear picture of your situation by
-                                        effortlessly organizing & tracking expenses.</p>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="single-blog.html">Reply</a>
-                                </div>
-                            </div>
+
+                                <!-- Show replies -->
+                                @foreach($comment->replies as $reply)
+                                    <div class="my-4 lonyo-blog-d-comment-wrap1 pl-101 d-flex justify-content-between">
+                                        <div class="lonyo-blog-d-comment-wrap1">
+                                            <div class="lonyo-blog-d-comment-thumb">
+                                                <img src="{{ asset('frontend') }}/assets/images/blog/b9.png" alt="">
+                                            </div>
+                                            <div class="lonyo-blog-d-comment-data">
+                                                <h5>{{ $reply->user->name ?? 'Guest' }}</h5>
+                                                <span>{{ Carbon\Carbon::parse($reply->created_at)->format('F d, Y') }}</span>
+                                                <p>{{ $reply->comment }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="reply-btn">
+                                            <button onclick="showReplyForm({{ $reply->id }})" class="reply-btn">
+                                                Reply
+                                            </button>
+                                            <a href="{{ route('comment-reply-remove', $reply->id) }}"
+                                                class="w-full px-1 py-1 my-2 text-sm text-left text-white bg-danger">
+                                                Remove
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="pl-101">
+                                        <form action="{{ route('comment.store') }}" method="POST" id="reply-{{ $reply->id }}"
+                                            class="my-2" style="display:none;">
+                                            @csrf
+                                            <input type="hidden" name="blog_id" value="{{ $blog->id }}">
+                                            <input type="hidden" name="parent_id" value="{{ $reply->id }}">
+
+                                            <textarea name="comment" class="mt-2 mb-2 form-control"
+                                                placeholder="Write reply..."></textarea>
+                                            <button type="submit" class="btn btn-sm btn-success">Reply</button>
+                                        </form>
+                                    </div>
+
+                                @endforeach
+
+                                {{-- Admin Reply Form --}}
+                                {{-- @auth
+                                @if(auth()->user()->name ?? 'Admin')
+
+                                <form action="{{ route('comment.reply') }}" method="POST" class="mt-2">
+                                    @csrf
+                                    <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                    <textarea name="reply" class="mb-1 form-control" placeholder="Admin reply..."></textarea>
+                                    <button class="btn btn-danger btn-sm">Admin Reply</button>
+                                </form>
+                                @endif
+                                @endauth --}}
+                            @endforeach
+
                         </div>
-                        <div class="lonyo-blog-d-comment-box2" data-aos="fade-up" data-aos-duration="700">
+
+
+
+                        <div class="mt-4 lonyo-blog-d-comment-box2" data-aos="fade-up" data-aos-duration="700">
                             <h4>Leave a comments:</h4>
+                            {{-- Comment Form --}}
                             <div class="lonyo-contact-box">
-                                <form action="#">
-                                    <div class="lonyo-main-field">
-                                        <p>Full name*</p>
-                                        <input type="text" placeholder="Enter your name">
-                                    </div>
-                                    <div class="lonyo-main-field">
-                                        <p>Email address*</p>
-                                        <input type="email" placeholder="Your email address">
-                                    </div>
+                                <form action="{{ route('comment.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="blog_id" value="{{ $blog->id }}">
                                     <p>Message</p>
                                     <div class="lonyo-main-field-textarea">
-                                        <textarea class="button-text" name="textarea"
-                                            placeholder="Write your message here..."></textarea>
+                                        <textarea class="button-text" name="comment"
+                                            placeholder="Write a comment..."></textarea>
                                     </div>
-                                    <button class="lonyo-default-btn extra-btn d-block" type="button">Submit A
+
+                                    <button class="lonyo-default-btn extra-btn d-block" type="submit">Submit A
                                         Comment</button>
                                 </form>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
+
+
+                {{-- <h3>Comments ({{ $blog->comments->count() }})</h3>
+
+                {{-- Comment Form --}}
+                {{--<form action="{{ route('comment.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="blog_id" value="{{ $blog->id }}">
+
+                    <textarea name="content" class="form-control" placeholder="Write a comment..." required></textarea>
+
+                    <button type="submit" class="mt-2 btn btn-primary">Post Comment</button>
+                </form> --}}
+
                 <!-- blog sidebar -->
+
                 @include('frontend/components/blog')
+
                 <!-- blog sidebar -->
 
             </div>
+
             <div class="deivdead-line"></div>
             <div class="lonyo-section-title center max-width-700">
                 <h2>Check out the related articles and news</h2>
             </div>
 
             {{-- @php
-                $category = App\models\BlogCategory::with('blog')
-                    ->where('id', $blog->category_id)
-                    ->first(); // প্রথম category
-                $blogs = $category->blog->toArray();
-                $relatedPosts = array_slice($blogs, 1); // প্রথম বাদ বাকি সব
+            $category = App\models\BlogCategory::with('blog')
+            ->where('id', $blog->category_id)
+            ->first(); // প্রথম category
+            $blogs = $category->blog->toArray();
+            $relatedPosts = array_slice($blogs, 1); // প্রথম বাদ বাকি সব
             @endphp --}}
 
             <!-- Related Blogs -->
@@ -229,6 +302,41 @@
         </div>
     </div>
     <!-- end blog -->
+    <script>
+        function showReplyForm(id) {
+            let form = document.getElementById('reply-' + id);
 
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
+            }
+        }
+
+
+        function toggleReplyForm(id) {
+            const form = document.getElementById('reply-form-' + id);
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+
+        }
+
+        document.querySelectorAll('.blog-title').forEach((title) => {
+            title.addEventListener('click', () => {
+                const id = title.getAttribute('data-id');
+                const commentBox = document.querySelector(`.comment-${id}`);
+
+                if (!commentBox) return;
+
+                // অন্য সব comment section বন্ধ করো
+                document.querySelectorAll('.comment-section').forEach((section) => {
+                    if (section !== commentBox) section.classList.add('d-none');
+                });
+
+                // toggle show/hide current one
+                commentBox.classList.toggle('d-none');
+            });
+        });
+
+    </script>
 
 @endsection
