@@ -28,14 +28,18 @@ class DatabaseSeeder extends Seeder
             SliderSeeder::class,
             // ServiceSeeder::class,
             // CareerSeeder::class,
-            // FaqSeeder::class,
-            // SettingSeeder::class,
+            WebSiteSettingSeeder::class,
             SiteTitleSeeder::class,
             FeatureSeeder::class,
             FinancialSeeder::class,
             AnswerSeeder::class,
             CategorySeeder::class,
             BlogSeeder::class,
+            TeamSeeder::class,
+            AboutSeeder::class,
+            ClarifiSeeder::class,
+            UsabilitiSeeder::class,
+            AppSeeder::class,
         ]);
     }
 }

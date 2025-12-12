@@ -66,8 +66,15 @@ Route::get('blog/single-blog/{blog:slug}', [FrontendController::class, 'SingleBl
 // Blog with comment
 Route::post('/comment/store', [FrontendController::class, 'CommentStore'])->name('comment.store');
 Route::post('/comment/reply', [FrontendController::class, 'CommentReply'])->middleware(['auth'])->name('comment.reply');
+Route::post('/admin/reply/store', [FrontendController::class, 'AdminReply'])->name('admin.reply.store');
 
-Route::get('comment-reply-remove/{comment}', [FrontendController::class, 'CommentRemove'])->name('comment-reply-remove');
+
+// web.php
+Route::get('/comment/{id}/edit', [FrontendController::class, 'EditComment'])->name('comment.edit');
+Route::put('/comment/{id}', [FrontendController::class, 'UpdateComment'])->name('comment.update');
+
+
+Route::delete('comment-reply-remove/{comment}', [FrontendController::class, 'CommentRemove'])->name('comment-reply-remove');
 
 //career
 Route::get('career', [FrontendController::class, 'career'])->name('career');

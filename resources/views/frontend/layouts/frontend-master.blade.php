@@ -28,7 +28,6 @@
   <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/main.css">
   <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/app.min.css">
 
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 </head>
@@ -129,10 +128,8 @@
     
    <!-- Footer  -->
 
- 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 
 //   @if(Session::has('message'))
@@ -155,10 +152,6 @@
 
 
 </script>
-
-
-<!-- Axios CDN -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
  <!-- scripts -->
  @stack('frontend-js')

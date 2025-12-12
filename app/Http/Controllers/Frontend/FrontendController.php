@@ -158,10 +158,10 @@ class FrontendController extends Controller
 
     public function CommentStore(Request $request)
     {
-        $auth = Auth::check();
+        // $auth = Auth::check();
 
 
-        Comment::create([
+       $comment = Comment::create([
             'blog_id' => $request->blog_id,
             'user_id' => Auth::id(),
             'parent_id' => $request->parent_id,
@@ -169,7 +169,17 @@ class FrontendController extends Controller
         ]);
 
 
-        return back()->with('success', 'Comment added successfully!');
+        return response()->json(['status' => true]);
+
+
+    //    return back()->with('success', 'Comment added successfully!');
+
+        // return response()->json([
+        //     'status' => true,
+        //     'message' => 'Comment added successfully!'
+        // ]);
+
+
     }
 
     // Admin Reply
@@ -190,14 +200,54 @@ class FrontendController extends Controller
             'comment'   => $request->reply,
         ]);
 
-        return back()->with('message', 'Admin replied successfully!');
+         // optional: return HTML to append in DOM
+      //  $html = view('partials.admin_reply', compact('reply'))->render();
+
+         return response()->json([
+            'success' => true,
+            'message' => 'Reply sent successfully',
+            // 'html' => $html
+        ]);
+       
+
+        // return back()->with('message', 'Admin replied successfully!');
     }
 
-    public function CommentRemove(Request $request, $comment){
+    public function EditComment($id){
+        $comment = Comment::findOrFail($id);
+        return response()->json([
+            'status' => true,
+            'data' => $comment
+        ]);
+    }
 
-        $comment = Comment::find($comment);
+
+    public function UpdateComment(Request $request, $id)
+    {
+        $request->validate([
+            'comment' => 'required'
+        ]);
+
+        $comment = Comment::findOrFail($id);
+        $comment->update([
+            'comment' => $request->comment
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Comment updated!'
+        ]);
+    }
+
+    public function CommentRemove(Comment $comment){
+
+       // $comment = Comment::find($comment);
         $comment->delete();
-        return back();
+        // return back();
+        return response()->json([
+            'status' => true,
+            'message' => 'Comment deleted!'
+        ]);
     }
 
 

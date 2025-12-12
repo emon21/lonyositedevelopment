@@ -131,6 +131,7 @@
   </footer>
 
   <!-- scripts -->
+
   <script src="{{ asset('frontend') }}/assets/js/jquery-3.7.1.min.js"></script>
   <script src="{{ asset('frontend') }}/assets/js/bootstrap.bundle.min.js"></script>
   <script src="{{ asset('frontend') }}/assets/js/menu/menu.js"></script>
@@ -152,4 +153,13 @@
   <script src="{{ asset('frontend') }}/assets/js/slick.js"></script>
 
   <script src="{{ asset('frontend') }}/assets/js/app.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Axios CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script src="{{ asset('frontend') }}/custom.js"></script>
+
 
