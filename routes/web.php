@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\DesignController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\ClarifiController;
 use App\Http\Controllers\admin\FeatureController;
+use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\admin\BlogCategoryController;
 
@@ -178,11 +180,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::delete('/feature/{feature}', 'destroy')->name('feature.destroy');
 
         // Duplicate        
-        Route::post('/feature/duplicate/{id}','duplicate')->name('feature.duplicate');
+        Route::post('/feature/duplicate/{id}', 'duplicate')->name('feature.duplicate');
 
         // Restore
-        Route::get('/feature-restore','DataRestore')->name('feature.restore');
-
+        Route::get('/feature-restore', 'DataRestore')->name('feature.restore');
     });
 
 
@@ -196,15 +197,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     //     Route::get('/clarifi/{clarifi}/edit', 'edit')->name('clarifi.edit');
     //     Route::put('/clarifi/{clarifi}', 'update')->name('clarifi.update');
     //     Route::delete('/clarifi/{clarifi}', 'destroy')->name('clarifi.destroy');
- 
+
     // });
-    
+
     Route::controller(HomeController::class)->group(function () {
 
         Route::get('/clarifi', 'Getclarifis')->name('clarifi.index');
         Route::put('/clarifi/{id}', 'UpdateClarifi')->name('clarifi.update');
-
-        
     });
 
     // financial
@@ -221,7 +220,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         //Usability Connect
         Route::get('/usability/connect', 'UsabilityConnect')->name('usability-connect');
         Route::get('/usability-connect/create', 'UsabilityConnectCreate')->name('usability-connect.create');
-        
+
         Route::post('/usability-connect/store', 'UsabilityConnectStore')->name('usability-connect.store');
 
         // edit
@@ -235,7 +234,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
         // delete
         Route::delete('/usability-connect/{id}', 'UsabilityConnectDelete')->name('usability-connect.destroy');
-
     });
 
 
@@ -243,18 +241,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::controller(HomeController::class)->group(function () {
 
         // answer
-         Route::get('/answer', 'answer')->name('answer');
+        Route::get('/answer', 'answer')->name('answer');
 
-         Route::get('/answer/create', 'CreateAnswer')->name('answer.create');
-         Route::post('/answer/store', 'StoreAnswer')->name('answer.store');
+        Route::get('/answer/create', 'CreateAnswer')->name('answer.create');
+        Route::post('/answer/store', 'StoreAnswer')->name('answer.store');
 
-         Route::get('/answer/edit/{id}', 'EditAnswer')->name('answer.edit');
-         //update
-         Route::put('/answer/update/{id}', 'UpdateAnswer')->name('answer.update');
-         // delete
-         Route::delete('/answer/delete/{id}', 'DestroyAnswer')->name('answer.destroy');
-
-
+        Route::get('/answer/edit/{id}', 'EditAnswer')->name('answer.edit');
+        //update
+        Route::put('/answer/update/{id}', 'UpdateAnswer')->name('answer.update');
+        // delete
+        Route::delete('/answer/delete/{id}', 'DestroyAnswer')->name('answer.destroy');
     });
 
     # Apps Route
@@ -272,16 +268,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         //  // delete
         //  Route::delete('/apps/delete/{id}', 'DestroyApp')->name('apps.destroy');
 
-         // get
+        // get
         Route::get('/apps', 'AllApp')->name('apps');
 
-         Route::post('/apps/update-apps', 'UpdateApps')->name('apps.update-apps');
+        Route::post('/apps/update-apps', 'UpdateApps')->name('apps.update-apps');
 
         //  Route::post('/apps/update-apps-image/{id}', 'UpdateAppsImage')->name('apps.update.image');
-         Route::post('/apps/update-apps-image/{id}', 'updateImage')->name('apps.update-image');
-
- 
-        });
+        Route::post('/apps/update-apps-image/{id}', 'updateImage')->name('apps.update-image');
+    });
 
 
     # Our Team
@@ -289,18 +283,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::controller(TeamController::class)->group(function () {
 
         // team
-         Route::get('/team', 'index')->name('team');
+        Route::get('/team', 'index')->name('team');
 
-         Route::get('/team/create', 'create')->name('team.create');
-         Route::post('/team/store', 'store')->name('team.store');
+        Route::get('/team/create', 'create')->name('team.create');
+        Route::post('/team/store', 'store')->name('team.store');
 
-         Route::get('/team/edit/{team}', 'edit')->name('team.edit');
-         //update
-         Route::put('/team/update/{team}', 'update')->name('team.update');
-         // delete
-         Route::delete('/team/delete/{team}', 'destroy')->name('team.destroy');
-
-
+        Route::get('/team/edit/{team}', 'edit')->name('team.edit');
+        //update
+        Route::put('/team/update/{team}', 'update')->name('team.update');
+        // delete
+        Route::delete('/team/delete/{team}', 'destroy')->name('team.destroy');
     });
 
 
@@ -317,7 +309,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
         Route::get('/get/about',  'GetAboutUs')->name('get.about');
         Route::put('/about/update/{about}',  'UpdateAbout')->name('about.update');
-
     });
 
 
@@ -333,24 +324,60 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::put('/category/update/{id}', 'update')->name('category.update');
         Route::delete('/category/delete/{id}', 'destroy')->name('category.destroy');
         Route::get('/category/show/{category}', 'show')->name('category.show');
-
     });
 
-        # BLog Route
+    # BLog Route
     Route::controller(BlogController::class)->group(function () {
-            
-            // blog route list
-            Route::get('/blog', 'index')->name('blog');
-            Route::get('/blog/create', 'create')->name('blog.create');
-            Route::post('/blog/store', 'store')->name('blog.store');
-            Route::get('/blog/edit/{blog}', 'edit')->name('blog.edit');
-            Route::put('/blog/update/{blog}', 'update')->name('blog.update');
-            Route::delete('/blog/delete/{blog}', 'destroy')->name('blog.destroy');
 
-            Route::get('/blog/show/{blog}', 'show')->name('blog.show');
+        // blog route list
+        Route::get('/blog', 'index')->name('blog');
+        Route::get('/blog/create', 'create')->name('blog.create');
+        Route::post('/blog/store', 'store')->name('blog.store');
+        Route::get('/blog/edit/{blog}', 'edit')->name('blog.edit');
+        Route::put('/blog/update/{blog}', 'update')->name('blog.update');
+        Route::delete('/blog/delete/{blog}', 'destroy')->name('blog.destroy');
+
+        Route::get('/blog/show/{blog}', 'show')->name('blog.show');
+    });
+
+    # Website Setting Route
+    // Route::get('website-setting', [AdminController::class, 'WebsiteSetting'])->name('website');
+
+    Route::controller(SettingsController::class)->group(function () {
+
+        Route::get('/website-setting',  'WebsiteSetting')->name('website.settings');
+        
+      
+        Route::get('/settings',  'index')->name('settings.index');
+        // Route::post('/settings/update', 'update')->name('settings.update');
+
+        // web site setting update route 
+        Route::post('/settings/update', 'UpdateSetting')->name('settings.update');
+
+        // rest setting
+        Route::post('/admin/settings/reset', 
+         'ResetSetting')
+            ->name('settings.reset');
+
+        // mail testing
+        Route::post('/admin/mail-settings/test', 'testMail')
+            ->name('mail.settings.test');
 
     });
-   
+
+    Route::get('/language/{locale}', function ($locale) {
+        if (in_array($locale, ['en', 'bn'])) {
+            session(['locale' => $locale]);
+            App::setLocale($locale);
+
+            if (request()->wantsJson() || request()->ajax()) {
+                return response()->json(['status' => 'success']);
+            }
+        }
+
+        return redirect()->back();
+    })->name('language.switch');
+
 });
 
 // out of any middleware
@@ -372,3 +399,55 @@ Route::get('single-team/{team}', [FrontendController::class, 'SingleTeam'])->nam
 
 
 # =========== Frontend Route List =========== #
+
+
+// Route::post('/language', function () {
+//     $locale = request('site_language');
+
+//     // শুধু valid languages allow করুন
+//     if (in_array($locale, ['en', 'bn'])) {
+//         session(['locale' => $locale]); // middleware session
+//     }
+
+//     return redirect()->back();
+// })->name('language.switch');
+
+// Route::get('/language/{locale}', function ($locale) {
+//     if (in_array($locale, ['en', 'bn'])) {
+//         session(['locale' => $locale]);
+//         // AJAX request হলে JSON return করুন
+//         if (request()->ajax()) {
+//             return response()->json(['status' => 'success']);
+//         }
+//     }
+//     return redirect()->back();
+// })->name('language.switch');
+
+
+// Route::get('/language/{locale}', function ($locale) {
+//     if (in_array($locale, ['en', 'bn'])) {
+//         session(['locale' => $locale]);
+//         App::setLocale($locale);
+
+//         if (request()->wantsJson() || request()->ajax()) {
+//             return response()->json(['status' => 'success']);
+//         }
+//     }
+
+//     return redirect()->back();
+// })->name('language.switch');
+
+
+// Route::get('/language/{locale}', function ($locale) {
+//     if (in_array($locale, ['en', 'bn'])) {
+//         session(['locale' => $locale]);
+//         App::setLocale($locale);
+
+//         if (request()->wantsJson() || request()->ajax()) {
+//             return response()->json(['status' => 'success']);
+//         }
+//     }
+
+//     return redirect()->back();
+// })->name('language.switch');
+

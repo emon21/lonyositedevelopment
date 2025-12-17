@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\VerificationMail;
+use App\Models\WebSiteSetting;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -283,4 +284,6 @@ class AdminController extends Controller
 
         // return back()->with('success','Password Changed Successfully');
     }
+
+  
 }

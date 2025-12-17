@@ -4,7 +4,11 @@
       <div class="col-8 col-sm-auto ">
         <div class="header-logo1 ">
           <a href="{{ url('/') }}">
-            <img src="{{ asset('frontend') }}/assets/images/logo/logo-dark.svg" alt="logo">
+          <img id="logo-preview" src="{{ !empty($settings['site_logo']) && file_exists(public_path($settings['site_logo']))
+            ? asset($settings['site_logo'])
+            : asset('uploads/no_image.jpg') }}" alt="Logo Preview" class="mt-2 rounded img-fluid">
+            
+            {{-- <img src="{{ asset('frontend') }}/assets/images/logo/logo-dark.svg" alt="logo"> --}}
           </a>
         </div>
       </div>

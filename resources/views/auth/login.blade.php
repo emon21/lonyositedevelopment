@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8" />
-    <title>Log In | Tapeli - Admin Dashboard</title>
+    <title>Log In | Admin Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc." />
     <meta name="author" content="Zoyothemes" />
@@ -40,7 +38,7 @@
                                 <div class="pt-0">
                                     <!-- Two Factor Authentication -->
                                     <h4 class="mt-0 mb-3">Sign In</h4>
-                                    <p class="text-muted mb-4">Enter your email address and password to access admin panel.</p>
+                                    <p class="mb-4 text-muted">Enter your email address and password to access admin panel.</p>
                                     
                                     {{-- <form class="my-4" method="POST" action="{{ route('admin.login') }}"> --}}
                                     <form class="my-4" method="POST" action="{{ route('login') }}">
@@ -137,11 +135,16 @@
                 <div class="col-xl-7">
                     <div class="p-4 account-page-bg p-md-5">
                         <div class="text-center">
-                            <h3 class="mb-3 text-dark pera-title">Quick, Effective, and Productive With  Admin
-                                Dashboard</h3>
+                            <h3 class="mb-3 text-dark pera-title">
+                            {{ $settings['page_title'] ?? 'Quick, Effective, and Productive With Admin Dashboard' }}</h3>
                             <div class="auth-image">
-                                <img src="{{asset('backend')}}/assets/images/authentication.svg"
-                                    class="mx-auto img-fluid" alt="images">
+                                
+                                {{-- <img src="{{asset('backend')}}/assets/images/authentication.svg"
+                                    class="mx-auto img-fluid" alt="images"> --}}
+
+                                    <img id="logo-preview" src="{{ !empty($settings['page_image']) && file_exists(public_path($settings['page_image']))
+    ? asset($settings['page_image'])
+    : asset('uploads/no_image.jpg') }}" alt="Logo Preview" class="mt-2 rounded img-fluid">
                             </div>
                         </div>
                     </div>

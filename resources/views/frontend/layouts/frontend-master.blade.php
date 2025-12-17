@@ -5,9 +5,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ $title ?? 'Lonyo - IT Solution & Technology Temaptle' }}</title>
+  {{-- Basic SEO --}}
+  <meta name="description" content="{{ $settings['site_description'] ?? 'This is a demo website description.' }}">
+  <meta name="keywords" content="{{ $settings['site_keywords'] ?? 'laravel, php, web development' }}">
+  <meta name="author" content="{{ $settings['site_author'] ?? 'Admin' }}">
+  <meta name="robots" content="index, follow">
 
-  <link rel="shortcut icon" href="{{ asset('frontend') }}/assets/images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="{{ asset('frontend') }}/assets/images/favicon.ico" type="image/x-icon">
+  {{-- Favicon --}}
+  {{-- <link rel="icon" type="image/png" href="{{ $settings['site_favicon'] && file_exists(public_path($settings['site_favicon']))
+  ? asset($settings['site_favicon'])
+  : asset('uploads/favicon.png') }}"> --}}
+
+  <link rel="shortcut icon" href="{{ !empty($settings['site_favicon']) && file_exists(public_path($settings['site_favicon']))
+  ? asset($settings['site_favicon'])
+  : asset('uploads/no_image.jpg') }}" type="image/x-icon">
+   
   <!--- End favicon-->
 
   <link href="https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">

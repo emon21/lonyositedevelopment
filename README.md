@@ -61,6 +61,8 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - Blade
 - Java Script
 - More Technology
+- Axios
+- More Technology
 
 ## Contributing
 
@@ -69,7 +71,6 @@ Thank you for considering contributing to the Laravel framework! The contributio
 ## Authentication Login Info :
 
    - Admin Info :
-
    - Frontend Info :
-
+   - More Info :
 

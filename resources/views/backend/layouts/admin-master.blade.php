@@ -33,11 +33,31 @@
     <link href="{{ asset('backend') }}/assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css"
         rel="stylesheet" type="text/css" />
 
-        <!-- Quill css -->
-        <link href="{{ asset('backend') }}/assets/libs/quill/quill.core.js" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('backend') }}/assets/libs/quill/quill.snow.css" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('backend') }}/assets/libs/quill/quill.bubble.css" rel="stylesheet" type="text/css" />
-         <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+    <!-- bootstrap-icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Quill css -->
+    <link href="{{ asset('backend') }}/assets/libs/quill/quill.core.js" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend') }}/assets/libs/quill/quill.snow.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend') }}/assets/libs/quill/quill.bubble.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+    <style>
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #343a40;
+            /* Dark background */
+            color: #fff;
+            /* Text color */
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 50%;
+            /* Makes it circular */
+            text-align: center;
+            line-height: 40px;
+            /* Vertically center the text */
+        }
+    </style>
 
 </head>
 
@@ -87,12 +107,12 @@
 
     </div>
     <!-- END wrapper -->
-       
+
     <!-- Vendor -->
     <script src="{{ asset('backend') }}/assets/libs/jquery/jquery.min.js"></script>
-    
+
     <script src="{{ asset('backend') }}/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    
+
     <script src="{{ asset('backend') }}/assets/libs/simplebar/simplebar.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/node-waves/waves.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
@@ -193,36 +213,36 @@
         // @endif 
 
 
-        // @if(Session::has('message'))
-            //     toastr["{{ Session::get('alert-type') }}"](
-            //         "{{ Session::get('message') }}",
-            //         "{{ Session::get('title') }}"
-            //     );
-        // @endif
-
         @if(Session::has('message'))
-            var type = "{{ Session::get('alert-type', 'info') }}";
-            var title = "{{ Session::get('title') }}";
-            var message = "{{ Session::get('message') }}";
-
-            switch (type) {
-                case 'info':
-                    toastr.info(message, title);
-                    break;
-
-                case 'success':
-                    toastr.success(message, title);
-                    break;
-
-                case 'warning':
-                    toastr.warning(message, title);
-                    break;
-
-                case 'error':
-                    toastr.error(message, title);
-                    break;
-            }
+            toastr["{{ Session::get('alert-type') }}"](
+                "{{ Session::get('message') }}",
+                "{{ Session::get('title') }}"
+            );
         @endif
+
+            @if(Session::has('message'))
+                var type = "{{ Session::get('alert-type', 'info') }}";
+                var title = "{{ Session::get('title') }}";
+                var message = "{{ Session::get('message') }}";
+
+                switch (type) {
+                    case 'info':
+                        toastr.info(message, title);
+                        break;
+
+                    case 'success':
+                        toastr.success(message, title);
+                        break;
+
+                    case 'warning':
+                        toastr.warning(message, title);
+                        break;
+
+                    case 'error':
+                        toastr.error(message, title);
+                        break;
+                }
+            @endif
 
     </script>
 
@@ -233,12 +253,12 @@
     <script src="{{ asset('backend') }}/assets/js/validate.min.js"></script>
 
     <!-- Quill Editor Js -->
-        <script src="{{ asset('backend') }}/assets/libs/quill/quill.core.js"></script>
-        <script src="{{ asset('backend') }}/assets/libs/quill/quill.min.js"></script>
-        <!-- Quill Demo Js -->
-        <script src="{{ asset('backend') }}/assets/js/pages/quilljs.init.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/quill/quill.core.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/quill/quill.min.js"></script>
+    <!-- Quill Demo Js -->
+    <script src="{{ asset('backend') }}/assets/js/pages/quilljs.init.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
 
     <script>
         // $(function () {
@@ -390,37 +410,37 @@
 
         document.addEventListener("DOMContentLoaded", function () {
 
-    const deleteButtons = document.querySelectorAll(".delete-btn");
+            const deleteButtons = document.querySelectorAll(".delete-btn");
 
-    deleteButtons.forEach(button => {
+            deleteButtons.forEach(button => {
 
-        button.addEventListener("click", function (e) {
-            e.preventDefault();
+                button.addEventListener("click", function (e) {
+                    e.preventDefault();
 
-            // ⬇️ YOUR LINE
-            const link = this.getAttribute("href");
+                    // ⬇️ YOUR LINE
+                    const link = this.getAttribute("href");
 
-            Swal.fire({
-                title: "Are you sure?",
-                text: "Restore Feature data?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, Restore"
-            }).then((result) => {
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "Restore Feature data?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, Restore"
+                    }).then((result) => {
 
-                if (result.isConfirmed) {
-                    window.location.href = link;
-                }
+                        if (result.isConfirmed) {
+                            window.location.href = link;
+                        }
+
+                    });
+
+                });
 
             });
 
         });
-
-    });
-
-});
 
     </script>
 

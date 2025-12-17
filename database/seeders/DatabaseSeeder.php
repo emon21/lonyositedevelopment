@@ -40,6 +40,9 @@ class DatabaseSeeder extends Seeder
             ClarifiSeeder::class,
             UsabilitiSeeder::class,
             AppSeeder::class,
+
+            // WebSiteSetting
+            WebSiteSettingSeeder::class
         ]);
     }
 }

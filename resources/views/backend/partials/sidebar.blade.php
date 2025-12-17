@@ -1,17 +1,56 @@
 <div class="app-sidebar-menu">
     <div class="h-100" data-simplebar>
 
+       
+
         <!--- Sidemenu -->
         <div id="sidebar-menu">
-
             <div class="logo-box">
-                <a href="{{ route('dashboard') }}" class="logo logo-light">
+                {{-- <a href="{{ route('dashboard') }}" class="gap-2 d-flex align-items-center">
+                    <span class="logo-lg">
+                        <img src="{{ !empty($settings['admin_logo']) && file_exists(public_path($settings['admin_logo']))
+    ? asset($settings['admin_logo'])
+    : asset('uploads/no_image.jpg') }}" alt="Site Logo" height="40">
+                    </span>
+
+                    <h4 class="mb-0">
+                        {{ $settings['site_name'] ?? 'Admin Dashboard' }}
+                    </h4>
+
+                </a> --}}
+                 <a href="{{ route('dashboard') }}" class="gap-2 d-flex align-items-center text-decoration-none">
+    <div class="logo-circle d-flex justify-content-center align-items-center">
+        AD
+    </div>
+    <h4 class="mb-0">{{ $settings['site_name'] ?? 'Admin Dashboard' }}</h4>
+</a>
+
+                {{-- <a href="{{ route('dashboard') }}" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="{{ asset('backend') }}/assets/images/logo-sm.png" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('backend') }}/assets/images/logo-light.png" alt="" height="24">
+                        <img src="{{ asset('backend') }}/assets/images/logo-dark.png" alt="" height="24">
                     </span>
+                </a> --}}
+            </div>
+
+            {{-- <div class="logo-box">
+                <a href="{{ route('dashboard') }}" class="logo logo-light">
+                    <span class="logo-sm">
+
+                        {{-- <img src="{{ 
+                            !empty($settings['site_logo']) && file_exists(public_path($settings['site_logo'])) 
+                            ? asset($settings['site_logo']) 
+                            : asset('uploads/default/logo.png') 
+                        }}" alt="Site Logo"> --}}
+
+
+                        {{-- <img src="{{ asset('backend') }}/assets/images/logo-sm.png" alt="" height="22"> -
+                    </span>
+                    {{-- <span class="logo-lg">
+                        <img src="{{ asset('backend') }}/assets/images/logo-light.png" alt="" height="24">
+                    </span> -
                 </a>
                 <a href="{{ route('dashboard') }}" class="logo logo-dark">
                     <span class="logo-sm">
@@ -21,7 +60,7 @@
                         <img src="{{ asset('backend') }}/assets/images/logo-dark.png" alt="" height="24">
                     </span>
                 </a>
-            </div>
+            </div> --}}
 
             <ul id="side-menu">
 
@@ -43,17 +82,21 @@
 
                 <li>
                     <a href="#slider" data-bs-toggle="collapse">
-                        <i data-feather="users"></i>
+                        <i data-feather="image"></i>
                         <span> Slider </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="slider">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.slider.index') }}" class="tp-link">All Slider</a>
+                                <a href="{{ route('admin.slider.index') }}" class="tp-link">
+                                    <i data-feather="list"></i> All Slider
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.slider.create') }}" class="tp-link">Slider Create</a>
+                                <a href="{{ route('admin.slider.create') }}" class="tp-link">
+                                    <i data-feather="plus-circle"></i> Slider Create
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -61,17 +104,21 @@
 
                 <li>
                     <a href="#feature" data-bs-toggle="collapse">
-                        <i data-feather="users"></i>
+                        <i data-feather="zap"></i>
                         <span> Feature Setup</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="feature">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.feature.index') }}" class="tp-link">All Feature</a>
+                                <a href="{{ route('admin.feature.index') }}" class="tp-link">
+                                    <i data-feather="list"></i> All Feature
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.feature.create') }}" class="tp-link">Feature Create</a>
+                                <a href="{{ route('admin.feature.create') }}" class="tp-link">
+                                    <i data-feather="plus-circle"></i> Feature Create
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -79,14 +126,16 @@
 
                 <li>
                     <a href="#clarifi" data-bs-toggle="collapse">
-                        <i data-feather="users"></i>
+                        <i data-feather="check-square"></i>
                         <span> Clarifi Setup</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="clarifi">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.clarifi.index') }}" class="tp-link">Get Clarifi</a>
+                                <a href="{{ route('admin.clarifi.index') }}" class="tp-link">
+                                    <i data-feather="settings"></i> Get Clarifi
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -94,30 +143,33 @@
 
                 <li>
                     <a href="#financial" data-bs-toggle="collapse">
-                        <i data-feather="users"></i>
+                        <i data-feather="dollar-sign"></i>
                         <span> Financial Setup</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="financial">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.financial') }}" class="tp-link">Get Financial</a>
+                                <a href="{{ route('admin.financial') }}" class="tp-link">
+                                    <i data-feather="settings"></i> Get Financial
+                                </a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-
                 <li>
                     <a href="#usability" data-bs-toggle="collapse">
-                        <i data-feather="users"></i>
+                        <i data-feather="sliders"></i>
                         <span> Usability Setup</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="usability">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.get.usability') }}" class="tp-link">Get Usability</a>
+                                <a href="{{ route('admin.get.usability') }}" class="tp-link">
+                                    <i data-feather="settings"></i> Get Usability
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -125,7 +177,7 @@
 
                 <li>
                     <a href="#usability_connect" data-bs-toggle="collapse">
-                        <i data-feather="users"></i>
+                        <i data-feather="link-2"></i>
                         <span> Usability Connect Setup</span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -133,11 +185,13 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.usability-connect') }}" class="tp-link">
-                                    All Usability Connect</a>
+                                    <i data-feather="list"></i> All Usability Connect
+                                </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.usability-connect.create') }}" class="tp-link">
-                                    Add Usability Connect</a>
+                                    <i data-feather="plus-circle"></i> Add Usability Connect
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -145,7 +199,7 @@
 
                 <li>
                     <a href="#answer" data-bs-toggle="collapse">
-                        <i data-feather="users"></i>
+                        <i data-feather="message-circle"></i>
                         <span> Answer Setup</span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -153,11 +207,13 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.answer') }}" class="tp-link">
-                                    All Answer</a>
+                                    <i data-feather="list"></i> All Answer
+                                </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.answer.create') }}" class="tp-link">
-                                    Add Answer</a>
+                                    <i data-feather="plus-circle"></i> Add Answer
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -165,7 +221,7 @@
 
                 <li>
                     <a href="#apps" data-bs-toggle="collapse">
-                        <i data-feather="users"></i>
+                        <i data-feather="smartphone"></i>
                         <span> Apps Setup</span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -173,29 +229,30 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.apps') }}" class="tp-link">
-                                    All Apps</a>
+                                    <i data-feather="list"></i> All Apps
+                                </a>
                             </li>
-                            {{-- <li>
-                                <a href="{{ route('admin.apps.create') }}" class="tp-link">
-                                    Add Apps</a>
-                            </li> --}}
                         </ul>
                     </div>
                 </li>
 
                 <li>
                     <a href="#review" data-bs-toggle="collapse">
-                        <i data-feather="users"></i>
+                        <i data-feather="star"></i>
                         <span> Review </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="review">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.review.index') }}" class="tp-link">All Review</a>
+                                <a href="{{ route('admin.review.index') }}" class="tp-link">
+                                    <i data-feather="list"></i> All Review
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.review.create') }}" class="tp-link">Review Create</a>
+                                <a href="{{ route('admin.review.create') }}" class="tp-link">
+                                    <i data-feather="plus-circle"></i> Review Create
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -210,51 +267,48 @@
                     <div class="collapse" id="team">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.team') }}" class="tp-link">All Team</a>
+                                <a href="{{ route('admin.team') }}" class="tp-link">
+                                    <i data-feather="list"></i> All Team
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.team.create') }}" class="tp-link">Add Team</a>
+                                <a href="{{ route('admin.team.create') }}" class="tp-link">
+                                    <i data-feather="plus-circle"></i> Add Team
+                                </a>
                             </li>
-
                         </ul>
                     </div>
                 </li>
+
                 <li>
                     <a href="#about" data-bs-toggle="collapse">
-                        <i data-feather="users"></i>
+                        <i data-feather="info"></i>
                         <span> About </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="about">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.get.about') }}" class="tp-link">About Page</a>
+                                <a href="{{ route('admin.get.about') }}" class="tp-link">
+                                    <i data-feather="file-text"></i> About Page
+                                </a>
                             </li>
-
-
                         </ul>
                     </div>
                 </li>
 
                 <li>
-                    <a href="#category" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-package">
-                            <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
-                            <path
-                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                            </path>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                        </svg>
+                    <a href="#category" data-bs-toggle="collapse">
+                        <i data-feather="folder"></i>
                         <span> Category </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="category" style="">
+                    <div class="collapse" id="category">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('admin.category')}}" class="tp-link">Category</a>
+                                <a href="{{route('admin.category')}}" class="tp-link">
+                                    <i data-feather="folder-open"></i> Category
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -262,14 +316,16 @@
 
                 <li>
                     <a href="#blog" data-bs-toggle="collapse">
-                        <i data-feather="users"></i>
-                        <span>Blog Page</span>
+                        <i data-feather="edit-3"></i>
+                        <span> Blog Page</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="blog">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.blog') }}" class="tp-link">All Blog</a>
+                                <a href="{{ route('admin.blog') }}" class="tp-link">
+                                    <i data-feather="list"></i> All Blog
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -277,53 +333,39 @@
 
                 <li>
                     <a href="#contacts" data-bs-toggle="collapse">
-                        <i data-feather="users"></i>
-                        <span>Contact Page</span>
+                        <i data-feather="mail"></i>
+                        <span> Contact Page</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="contacts">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('contact.all.message') }}" class="tp-link">All Contacts</a>
+                                <a href="{{ route('contact.all.message') }}" class="tp-link">
+                                    <i data-feather="inbox"></i> All Contacts
+                                </a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
                 <li>
-                    <a href="#sidebarExpages" data-bs-toggle="collapse">
-                        <i data-feather="file-text"></i>
+                    <a href="#websiteSetting" data-bs-toggle="collapse">
+                        {{-- <i data-feather="settings"></i> --}}
+                        <i class="bi bi-gear me-3"></i>
                         <span> Web Site Settings </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarExpages">
+                    <div class="collapse" id="websiteSetting">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="pages-starter.html" class="tp-link">Starter</a>
+                                <a href="{{route('admin.website.settings')}}" class="tp-link">
+                                    <i data-feather="tool"></i> Settings
+                                </a>
                             </li>
                             <li>
-                                <a href="pages-profile.html" class="tp-link">Profile</a>
-                            </li>
-                            <li>
-                                <a href="pages-pricing.html" class="tp-link">Pricing</a>
-                            </li>
-                            <li>
-                                <a href="pages-timeline.html" class="tp-link">Timeline</a>
-                            </li>
-                            <li>
-                                <a href="pages-invoice.html" class="tp-link">Invoice</a>
-                            </li>
-                            <li>
-                                <a href="pages-faqs.html" class="tp-link">FAQs</a>
-                            </li>
-                            <li>
-                                <a href="pages-gallery.html" class="tp-link">Gallery</a>
-                            </li>
-                            <li>
-                                <a href="pages-maintenance.html" class="tp-link">Maintenance</a>
-                            </li>
-                            <li>
-                                <a href="pages-coming-soon.html" class="tp-link">Coming Soon</a>
+                                <a href="{{route('admin.settings.index')}}" class="tp-link">
+                                    <i data-feather="list"></i> All Settings
+                                </a>
                             </li>
                         </ul>
                     </div>

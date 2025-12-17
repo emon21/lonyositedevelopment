@@ -22,7 +22,7 @@
                 <div class="lonyo-contact-us-content">
                   <a href="mailto:name@email.com">
                     <h4>Send Email:</h4>
-                    <p>Support@gmail.com</p>
+                    <p>{{ $settings['site_email'] ?? 'Support@gmail.com' }}</p>
                   </a>
                 </div>
               </div>
@@ -34,7 +34,7 @@
                 <div class="lonyo-contact-us-content">
                   <a href="mailto:name@email.com">
                     <h4>Phone Call:</h4>
-                    <p>+088-345-9876</p>
+                    <p>{{ $settings['site_phone'] ?? '+088-345-9876' }}</p>
                   </a>
                 </div>
               </div>
@@ -78,9 +78,13 @@
   </div>
   <!-- end -->
   <div class="responsive-map">
-    <iframe class="lonyo-contact-us-map"
+    {{-- <iframe class="lonyo-contact-us-map"
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23329.023732868194!2d90.39248976764976!3d23.770650831777527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka!5e1!3m2!1sen!2sbd!4v1764259280744!5m2!1sen!2sbd"
       width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
+
+       <iframe class="lonyo-contact-us-map" src="{{ $settings['site_map'] ?? 'https://www.google.com/maps/embed?pb=default' }}"
+                                   width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 
