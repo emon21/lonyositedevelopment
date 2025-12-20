@@ -64,7 +64,7 @@ class BlogSeeder extends Seeder
         ];
 
         # Delete Blog Data
-       // Blog::truncate();
+    //    Blog::truncate();
 
         foreach ($blogs as $blog) {
             Blog::create([

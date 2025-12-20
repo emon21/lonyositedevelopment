@@ -64,9 +64,6 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - Axios
 - More Technology
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
 ## Authentication Login Info :
 
@@ -74,3 +71,30 @@ Thank you for considering contributing to the Laravel framework! The contributio
    - Frontend Info :
    - More Info :
 
+   - alwyes frontend to edit title and image chage with axios  as like elementor 
+
+# Features List : -
+
+   - BLog
+   - Category
+   - Web Site settings / Site Settings
+   - All Uploaded File Clear
+   - Slider
+   - Features
+   - Clarifi
+   - Get Clarifi
+  - Financial Setup
+  - Usability
+   - Answer
+  - Apps
+  - Review
+  - User Review ON Blog
+  - Our Team
+   - About
+   - Category
+  - Blog
+   - Contact Page
+
+## Contributing
+
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).

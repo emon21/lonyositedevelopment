@@ -12,8 +12,7 @@ class ReviewSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-
+    
         # Review List 
         $reviews = [
             [

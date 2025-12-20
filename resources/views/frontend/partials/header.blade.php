@@ -37,9 +37,9 @@
               <li>
                 <a href="{{ route('blog') }}">Blog</a>
               </li>
-              <li>
+              {{-- <li>
                 <a href="{{ route('career') }}">Career</a>
-              </li>
+              </li> --}}
               <li>
                 <a href="{{ route('contact') }}">Contact</a>
               </li>

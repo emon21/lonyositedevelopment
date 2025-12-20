@@ -105,6 +105,7 @@ class WebSiteSettingSeeder extends Seeder
             'mail_encryption' => 'tls',
             'mail_from_address' => 'no-reply@example.com',
             'mail_from_name' => 'My Website',
+            
             // 'site_logo' => null,
             // 'site_favicon' => null,
             // 'admin_logo' => null,

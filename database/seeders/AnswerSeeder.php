@@ -40,7 +40,7 @@ class AnswerSeeder extends Seeder
         Answer::truncate();
 
         # create data
-        foreach ($answer as $key => $value) {
+        foreach ($answer as $value) {
             Answer::create($value);
         }
     }

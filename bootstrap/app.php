@@ -23,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
     // SetLocale কে web group-এ শেষের দিকে append করুন (session start হওয়ার পরে)
     $middleware->web(append: [
         \App\Http\Middleware\SetLocale::class,
+
     ]);
 
     // যদি priority দিয়ে order control করতে চান (optional, কিন্তু safe)

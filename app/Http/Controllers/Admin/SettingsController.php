@@ -17,13 +17,6 @@ class SettingsController extends Controller
 {
     # WebsiteSetting
 
-    public function WebsiteSetting()
-    {
-        $webSiteSetting = WebSiteSetting::first();
-        return view('backend/setting/website-setting', ['webSiteSetting' => $webSiteSetting]);
-    }
-
-
     /**
      * Display the settings page
      */
@@ -85,8 +78,6 @@ class SettingsController extends Controller
         ];
 
 
-       
-
         // 🔹 File fields (separate)
         $fileFields = [
             'site_logo'            => 'site_logo.png',
@@ -101,7 +92,6 @@ class SettingsController extends Controller
         // mail setting
 
         // $this->setEnvValue($fields);
-
         
 
         // =========================
@@ -111,10 +101,10 @@ class SettingsController extends Controller
             $this->uploadImage($request, $key, $fileName);
         }
 
-
         // =========================
         // 🔹 Handle Text Inputs
         // =========================
+        
         foreach ($fields as $field) {
             if ($request->has($field)) {
                 WebSiteSetting::updateOrCreate(
@@ -128,30 +118,6 @@ class SettingsController extends Controller
         Artisan::call('cache:clear');
 
         return back()->with('success', 'Settings updated successfully');
-    }
-
-
-    public function testMail(Request $request)
-    {
-        $request->validate([
-            'test_email' => 'required|email',
-            // 'mail_msg' => 'required|string',
-        ]);
-
-        try {
-            Mail::raw(
-                '🎉 Congratulations! Your mail configuration is working successfully.',
-                // $request->mail_msg,
-                function ($message) use ($request) {
-                    $message->to($request->test_email)
-                        ->subject('Mail Configuration Test');
-                }
-            );
-
-            return back()->with('success', 'Test mail sent successfully!');
-        } catch (\Exception $e) {
-            return back()->with('error', 'Mail failed: ' . $e->getMessage());
-        }
     }
 
     /**
@@ -228,9 +194,6 @@ class SettingsController extends Controller
             $file = $request->file($key);
 
             // Unique file name
-          //  $fileName = time() . '_' . $key . '.' . $file->getClientOriginalExtension();
-
-            // Unique file name
             $fileName = time() . '_' . $key . '.' . $file->getClientOriginalExtension();
 
             // Destination path (public folder)
@@ -273,15 +236,35 @@ class SettingsController extends Controller
             );
         }
     }
-    # Reset Setting
 
+    public function testMail(Request $request)
+    {
+        $request->validate([
+            'test_email' => 'required|email'
+        ]);
+
+        try {
+            Mail::raw(
+             '🎉 Congratulations! Your mail configuration is working successfully.',
+                function ($message) use ($request) {
+                    $message->to($request->test_email)
+                        ->subject('Mail Configuration Test');
+                }
+            );
+
+            return back()->with('success', 'Test mail sent successfully!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Mail failed: ' . $e->getMessage());
+        }
+    }
+
+    # Reset Setting
+    
     public function ResetSetting(){
+        
         // delete uploaded images
     $paths = [
-        //'uploads/site',
-       // 'uploads/admin',
-        'uploads/settings'
-        
+            'uploads/settings'
     ];
 
     foreach ($paths as $path) {
@@ -290,40 +273,156 @@ class SettingsController extends Controller
         }
     }
 
-    // truncate settings table
-    WebSiteSetting::truncate();
+        // insert default settings
+        Artisan::call('db:seed', [
+            '--class' => 'WebSiteSettingSeeder'
+        ]);
+
+
+        // Artisan::call('migrate:fresh', ['--seed' => true]);
+        
+        // truncate settings table
+        // WebSiteSetting::truncate();
 
     return redirect()->back()->with('success', 'Website settings have been reset successfully!');
 
 
-
-    // // delete uploads
-    // File::deleteDirectory(public_path('uploads'));
-
-    // // clear table
-    // WebSiteSetting::truncate();
-
-    // // insert default settings
-    // Artisan::call('db:seed', [
-    //     '--class' => 'WebSiteSettingSeeder'
-    // ]);
-
-    // return response()->json([
-    //     'status' => true,
-    //     'message' => 'Website settings reset successfully!'
-    // ]);
-
-//     যদি folder delete না করে শুধু ভিতরের file delete করতে চাও:
-
-// File::cleanDirectory(public_path($path));
+    }
 
 
-// ✅ Safe Usage (Recommended)
-// if (File::exists(public_path($path))) {
-//     File::deleteDirectorydeleteDirectory(public_path($path));
-// }
+    public function toggle(Request $request)
+    {
+        if ($request->maintenance_mode === 'on') {
+            Artisan::call('down', [
+                '--secret' => 'admin-access',
+            ]);
+            return back()->with('success', 'Maintenance Mode ON করা হয়েছে');
+        }
+
+        Artisan::call('up');
+        return back()->with('success', 'Maintenance Mode OFF করা হয়েছে');
+    }
+
+    public function ChangeMode(Request $request)
+    {
+    
+      //  $mode = $request->maintenance_mode == 1;
+
+        // $fields = ['maintenance_mode'];
+
+        // foreach ($fields as $field) {
+        //     if ($request->has($field)) {
+        //         WebSiteSetting::updateOrCreate(
+        //             ['key' => $field],
+        //             ['value' => $request->input($field)]
+        //         );
+        //     }
+        // }
+
+        // WebSiteSetting::updateOrCreate(
+        //     ['key' => $key],
+        //     ['value' => $path]
+        // );
+
+        // $settings->update([
+        //     'maintenance_mode' => $mode
+        // ]);
+
+        // if ($mode) {
+        //     Artisan::call('down', [
+        //         '--secret' => 'admin-access'
+        //     ]);
+        //     return back()->with('success', 'Maintenance Mode ON করা হয়েছে');
+        // } else {
+        //     Artisan::call('up');
+        //     return back()->with('success', 'Maintenance Mode OFF করা হয়েছে');
+        // }
+
+        // return response()->json([
+        //     'status' => true,
+        //     'message' => $mode
+        //         ? 'Maintenance Mode Enabled'
+        //         : 'Maintenance Mode Disabled'
+        // ]);
 
 
+        $fields = ['maintenance_mode'];
+
+        foreach ($fields as $field) {
+            if ($request->has($field)) {
+
+                WebSiteSetting::updateOrCreate(
+                    ['key' => $field],
+                    ['value' => $request->input($field)]
+                );
+
+                // 🔥 Artisan command
+                if ($request->input($field) == 1) {
+                    Artisan::call('down', [
+                        '--secret' => 'admin-access'
+                    ]);
+                    return back()->with('success', 'Maintenance Mode OFF করা হয়েছে');
+                    
+                } else {
+                    Artisan::call('up');
+                    return back()->with('success', 'Maintenance Mode ON করা হয়েছে');
+                }
+            }
+        }
+
+        // return response()->json([
+        //     'status' => true,
+        //     'message' => $request->maintenance_mode == 1
+        //         ? 'Maintenance Mode Enabled'
+        //         : 'Maintenance Mode Disabled'
+        // ]);
+           
+    }
+
+    # All Uploaded File Clear
+
+    public function UploadFileClear(){
+
+        // delete uploaded images folder
+        $paths = [
+            'uploads/about',
+            'uploads/admin',
+            'uploads/apps',
+            'uploads/blog',
+            'uploads/clarifi',
+            'uploads/review',
+            'uploads/slider',
+            'uploads/team',
+            'uploads/usability'
+        ];
+
+        foreach ($paths as $path) {
+            if (File::exists(public_path($path))) {
+                // delete uploads File
+                File::deleteDirectory(public_path($path));
+            }
+        }
+
+        // // delete uploads File
+        // File::deleteDirectory(public_path('uploads'));
+
+        // যদি folder delete না করে শুধু ভিতরের file delete করতে চাও:
+
+       // File::cleanDirectory(public_path($path));
+
+        // ✅ Safe Usage (Recommended)
+        // if (File::exists(public_path($path))) {
+        //     File::deleteDirectory(public_path($path));
+        // }
+
+        // clear table
+        WebSiteSetting::truncate();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Website settings reset successfully!'
+        ]);
+       
     }
 
 }

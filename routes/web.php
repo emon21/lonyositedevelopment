@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\DesignController;
@@ -345,7 +346,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
     Route::controller(SettingsController::class)->group(function () {
 
-        Route::get('/website-setting',  'WebsiteSetting')->name('website.settings');
         
       
         Route::get('/settings',  'index')->name('settings.index');
@@ -355,13 +355,28 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::post('/settings/update', 'UpdateSetting')->name('settings.update');
 
         // rest setting
-        Route::post('/admin/settings/reset', 
+        Route::get('settings/reset', 
          'ResetSetting')
             ->name('settings.reset');
 
         // mail testing
-        Route::post('/admin/mail-settings/test', 'testMail')
+        Route::post('/mail-settings/test', 'testMail')
             ->name('mail.settings.test');
+
+        // maintenance mode 
+        // Route::middleware(['auth', 'admin'])->group(function () {
+        //     Route::post('/admin/maintenance',  'toggle')
+        //         ->name('maintenance.toggle');
+        // });
+
+        Route::post('/maintenance',  'toggle')
+            ->name('maintenance.toggle');
+            
+            // Route::post('/maintenance',  'ChangeMode')
+            // ->name('maintenance.toggle');
+
+        # full Site upload File Delete or Clear
+        Route::get('site/file-clear','UploadFileClear')->name('site.file.clear');   
 
     });
 

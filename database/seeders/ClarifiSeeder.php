@@ -30,7 +30,7 @@ class ClarifiSeeder extends Seeder
         Clarifi::truncate();
 
         # insert new data
-        foreach ($clarifi as $key => $value) {
+        foreach ($clarifi as $value) {
 
             Clarifi::create($value);
         }

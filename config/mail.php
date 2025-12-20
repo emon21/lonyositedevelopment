@@ -15,7 +15,7 @@ return [
     */
 
     'default' => env('MAIL_MAILER', 'log'),
-
+    
     /*
     |--------------------------------------------------------------------------
     | Mailer Configurations
@@ -34,6 +34,7 @@ return [
     |            "failover", "roundrobin"
     |
     */
+
 
     'mailers' => [
 

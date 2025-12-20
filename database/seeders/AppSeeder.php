@@ -13,7 +13,7 @@ class AppSeeder extends Seeder
      */
     public function run(): void
     {
-        $app = [
+        $apps = [
 
             [
                 'title' => 'Start a new level of money management',
@@ -28,7 +28,7 @@ class AppSeeder extends Seeder
         App::truncate();
 
         # insert new data
-        foreach ($app as $key => $value) {
+        foreach ($apps as  $value) {
 
             App::create($value);
         }

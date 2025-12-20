@@ -27,8 +27,5 @@ class AboutSeeder extends Seeder
         About::truncate();
         # insert new data
         About::insert($about);
-
-
-
     }
 }
